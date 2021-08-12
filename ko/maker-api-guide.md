@@ -181,13 +181,14 @@ curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/index
 </details>
 
 #### Error Codes
-
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 | -40000| InvalidParam | 파라미터에 오류가 있음 |
-| -40xxx| InvalidFile | 업로드된 파일 형식 오류 |
-| -40xxx| DownLoadFail | link로 전달된 파일 다운로드 실패 |
-| -40xxx| ParsingError | 파일의 첫 번째 줄 분석 실패 |
+| -40010| InvalidFileError | 파일 전달에 오류가 있는 경우 |
+| -40020| NoDataError | 전달된 파일이 빈 파일인 경우 |
+| -40030| ExceedDataSizeError | 전달된 파일이 정해진 용량 또는 정해진 데이터 갯수를 초과한 경우 |
+| -40040| IndexQuotaExceededException | 1일 요청 횟수를 초과한 경우 |
+| -40080| TooManyRequestError | 동시에 여러번 요청을 한 경우 |
 | -41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -50000| InternalServerError | 서버 오류 |
 
