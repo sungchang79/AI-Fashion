@@ -303,7 +303,6 @@ GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/indexes
 | limit | int | O | 100 | 최대 100.<br>start:0, limit:100의 경우 1부터~100까지. <br>start:200, limit:100 이면 201부터~300까지. |
 | order | string | X | "reservedTime:desc" | 기본 값. 등록 시간 내림 차순. 정렬 조건은 최대 1개 가능 |
 | status | string | X | "finished" | 색인의 상태 값 |
-| 
 
 #### paging
 * start와 limit 파라미터로 페이징이 가능합니다.
