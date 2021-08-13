@@ -89,7 +89,7 @@
 * 지원 이미지 포맷: PNG, JPEG, GIF
 
 ##### jsonl 예
-` ``
+```
 {"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category_id1": "A001", "category_id2": "A001001", "category_id3": "A001001001", "image_url": "http://aaaaaaa.bbbbb.jpg"}
 {"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category_id1": "A001", "category_id2": "A001001", "category_id3": "A001001002", "image_url": "http://bbbbbbb.ccccc.jpg"}
 ...
@@ -340,7 +340,7 @@ GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/indexes
     * reserved : 대기
     * running : 진행중 
     * failed : 전체 실패
-    * finished: 끝(부분 실패 포함)
+    * finished: 완료(부분 실패 포함)
 
 <details>
 <summary>요청 예 </summary>
@@ -364,7 +364,7 @@ curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=100&s
 | data.items[].service | String | O | testserviceid | 해당 색인요청이 발생한 서비스명 |
 | data.items[].id | String | O | 24bb94b3-8a6b-488e-b038-4f6038da2596 | 색인 id |
 | data.items[].filename | String | O | 202106251000_product.jsonl | 색인 파일 이름을 나타냅니다. |
-| data.items[].status | string | O | reserved | 현재 색인 상태를 나타냅니다<br>reserved : 대기<br>running : 진행중 <br>failed : 전체 실패<br/>finished: 끝(부분 실패 포함) |
+| data.items[].status | string | O | reserved | 현재 색인 상태를 나타냅니다<br>reserved : 대기<br>running : 진행중 <br>failed : 전체 실패<br/>finished: 완료(부분 실패 포함) |
 | data.items[].reservedTime | unix timestamp | O | 1625098033 | 색인 등록 시간 |
 | data.items[].startTime | unix timestamp | O | 1625098033 | 색인 시작 시간 |
 | data.items[].finishTime | unix timestamp | O | 1625098033 | 색인이 완료된 시간 |
