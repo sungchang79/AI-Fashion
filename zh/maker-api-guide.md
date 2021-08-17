@@ -14,6 +14,7 @@
     * csv파일의 경우 첫줄부터 실제 데이터로 채워야 합니다.
 * 파일 크기는 최대 20MB 까지 가능하고, 최대 허용 문서수는 10,000개 입니다.
 * 1일 최대 4회까지 업로드가 가능하며 매일 한국 시간 0시에 초기화 됩니다.
+* Service ID 당 색인 가능한 최대 문서수는 100,000개 입니다.
 
 ### 요청 공통 정보
 - API를 사용하기 위해서는 보안 키 인증 처리가 필요합니다.
@@ -109,14 +110,14 @@
 
 메서드 | URI
 --- | ---
-POST | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/index
+POST | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
-| service | 해당 Appkey에 소속된 service_id |
+| serviceID | 해당 Appkey에 소속된 service_id |
 
 [URL Parameter]
 
@@ -135,7 +136,7 @@ POST | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/index
 <summary>요청 예 1</summary>
 
 ```
-curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/index?format=jsonl" -H "Content-Type: multipart/form-file" -F "file=@/home/user1/202106251000_product.jsonl"
+curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -H "Content-Type: multipart/form-file" -F "file=@/home/user1/202106251000_product.jsonl"
 ```
 
 </details>
@@ -144,7 +145,7 @@ curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/index
 <summary>요청 예 2</summary>
 
 ```
-curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/index?format=jsonl -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
+curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
 ```
 
 </details>
@@ -286,14 +287,14 @@ curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-T
 
 메서드 | URI
 --- | ---
-GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/indexes
+GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
-| service | 해당 Appkey에 소속된 service_id |
+| serviceID | 해당 Appkey에 소속된 service_id |
 
 [URL Parameter]
 
