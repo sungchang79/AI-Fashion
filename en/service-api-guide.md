@@ -433,8 +433,8 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceI
 | -40000 | InvalidParam | 파라미터에 오류가 있음 |
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -42000 | NotExistServiceID | 등록 안 된 서비스 아이디 |
-| -45020 | ImageTooLargeException | [입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
-| -45040 | InvalidImageFormatException | [입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45020 | ImageTooLargeException | 이미지 파일의 크기가 너무 큽니다.<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45040 | InvalidImageFormatException | 이미지 파일이 지원하지 않는 형식입니다.<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
 | -45050 | InvalidImageURLException | 접근할 수 없는 URL |
 | -45060 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
 | -50000 | InternalServerError | 서버 오류 |
@@ -529,8 +529,9 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceI
 | -40000 | InvalidParam | 파라미터에 오류가 있음 |
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -42000 | NotExistServiceID | 등록 안 된 서비스 아이디 |
-| -45020 | ImageTooLargeException | [입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
-| -45040 | InvalidImageFormatException | [입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45020 | ImageTooLargeException | 이미지 파일의 크기가 너무 큽니다.<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45040 | InvalidImageFormatException | 이미지 파일이 지원하지 않는 형식입니다.<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
 | -45050 | InvalidImageURLException | 접근할 수 없는 URL |
 | -45060 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
 | -50000 | InternalServerError | 서버 오류 |
+
