@@ -83,7 +83,7 @@
 
 | メソッド | URI |
 | --- | --- |
-| POST | /ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID} |
+| POST | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID} |
 
 [Path Variable]
 
@@ -95,7 +95,7 @@
 <details><summary>リクエスト例</summary>
 
 ```
-curl -X POST "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}"
+curl -X POST "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}"
 ```
 
 </details>
@@ -140,7 +140,7 @@ curl -X POST "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{service
 
 | メソッド | URI |
 | --- | --- |
-| DELETE | /ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID} |
+| DELETE | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID} |
 
 [Path Variable]
 
@@ -152,7 +152,7 @@ curl -X POST "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{service
 <details><summary>リクエスト例</summary>
 
 ```
-curl -X DELETE "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}"
+curl -X DELETE "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}"
 ```
 
 </details>
@@ -196,7 +196,7 @@ curl -X DELETE "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{servi
 
 | メソッド | URI |
 | --- | --- |
-| GET | /ai-fashion-search/v1.0/appkeys/{appKey}/services |
+| GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/services |
 
 [Path Variable]
 
@@ -207,7 +207,7 @@ curl -X DELETE "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{servi
 <details><summary>リクエスト例</summary>
 
 ```
-curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/services"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 ```
 
 </details>
@@ -266,7 +266,7 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/services"
 
 | メソッド | URI |
 | --- | --- |
-| GET | /ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID} |
+| GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID} |
 
 [Path Variable]
 
@@ -285,7 +285,7 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/services"
 <details><summary>リクエスト例</summary>
 
 ```
-curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID}?limit=100"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID}?limit=100"
 ```
 
 </details>
@@ -351,7 +351,7 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceI
 
 | メソッド | URI |
 | --- | --- |
-| GET | /ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}/detect |
+| GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/detect |
 
 [Path Variable]
 
@@ -369,7 +369,7 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceI
 <details><summary>リクエスト例</summary>
 
 ```
-curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}/detect?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/detect?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg"
 ```
 
 </details>
@@ -433,8 +433,8 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceI
 | -40000 | InvalidParam | パラメータにエラーがある |
 | -41000 | UnauthorizedAppKey | 承認されていないAppkey |
 | -42000 | NotExistServiceID | 登録できないサービスID |
-| -45020 | ImageTooLargeException | [入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
-| -45040 | InvalidImageFormatException | [入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
+| -45020 | ImageTooLargeException | 画像ファイルが大きすぎる<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
+| -45040 | InvalidImageFormatException | 画像ファイルがサポートしていない形式<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
 | -45050 | InvalidImageURLException | アクセスできないURL |
 | -45060 | ImageTimeoutError | 画像ダウンロード時間超過 |
 | -50000 | InternalServerError | サーバーエラー |
@@ -457,7 +457,7 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceI
 
 | メソッド | URI |
 | --- | --- |
-| GET | /ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}/image |
+| GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/image |
 
 [Path Variable]
 
@@ -476,7 +476,7 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceI
 <details><summary>リクエスト例</summary>
 
 ```
-curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}/image?limit=100&amp;link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9u1XdzLmNvbS9mZy1pbWFnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUi0iJBTEwiLpbnB1dHMiOlt7ImJveCI6eyJsZWZ0IjozNQaInRvcCI6MyLCJ3aWR0aCI6MTU1LCJoZWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0=="
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/image?limit=100&amp;link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9u1XdzLmNvbS9mZy1pbWFnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUi0iJBTEwiLpbnB1dHMiOlt7ImJveCI6eyJsZWZ0IjozNQaInRvcCI6MyLCJ3aWR0aCI6MTU1LCJoZWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0=="
 ```
 
 </details>
@@ -529,8 +529,8 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceI
 | -40000 | InvalidParam | パラメータにエラーがある |
 | -41000 | UnauthorizedAppKey | 承認されていないAppkey |
 | -42000 | NotExistServiceID | 登録できないサービスID |
-| -45020 | ImageTooLargeException | [入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
-| -45040 | InvalidImageFormatException | [入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
+| -45020 | ImageTooLargeException | 画像ファイルが大きすぎる<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
+| -45040 | InvalidImageFormatException | 画像ファイルがサポートしていない形式<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
 | -45050 | InvalidImageURLException | アクセスできないURL |
 | -45060 | ImageTimeoutError | 画像ダウンロード時間超過 |
 | -50000 | InternalServerError | サーバーエラー |
