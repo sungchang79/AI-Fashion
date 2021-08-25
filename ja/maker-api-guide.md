@@ -14,6 +14,7 @@
     * csvファイルの場合、最初の行から実際のデータで埋める必要があります。
 * ファイルサイズは最大20MBまで可能で、最大許可文書数は10,000個です。
 * 1日最大4回までアップロードが可能で、毎日日本時間0時に初期化されます。
+* Service IDごとにインデックス可能な最大文書数は100,000個です。
 
 ### リクエスト共通情報
 - APIを使用するにはセキュリティキー認証処理が必要です。
@@ -109,14 +110,14 @@
 
 メソッド | URI
 --- | ---
-POST | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/index
+POST | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合AppkeyまたはサービスAppkey |
-| service | 該当Appkeyに所属するservice_id |
+| serviceID | 該当Appkeyに所属するservice_id |
 
 [URL Parameter]
 
@@ -135,7 +136,7 @@ POST | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/index
 <summary>リクエスト例1</summary>
 
 ```
-curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/index?format=jsonl" -H "Content-Type: multipart/form-file" -F "file=@/home/user1/202106251000_product.jsonl"
+curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -H "Content-Type: multipart/form-file" -F "file=@/home/user1/202106251000_product.jsonl"
 ```
 
 </details>
@@ -144,7 +145,7 @@ curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/index
 <summary>リクエスト例2</summary>
 
 ```
-curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/index?format=jsonl -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
+curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
 ```
 
 </details>
@@ -286,14 +287,14 @@ curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-T
 
 メソッド | URI
 --- | ---
-GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{service_id}/indexes
+GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合AppkeyまたはサービスAppkey |
-| service | 該当Appkeyに所属するservice_id |
+| serviceID | 該当Appkeyに所属するservice_id |
 
 [URL Parameter]
 
