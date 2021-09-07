@@ -110,7 +110,7 @@
 
 메서드 | URI
 --- | ---
-POST | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index
+POST | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index
 
 [Path Variable]
 
@@ -136,7 +136,7 @@ POST | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index
 <summary>요청 예 1</summary>
 
 ```
-curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -H "Content-Type: multipart/form-file" -F "file=@/home/user1/202106251000_product.jsonl"
+curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -H "Content-Type: multipart/form-file" -F "file=@/home/user1/202106251000_product.jsonl"
 ```
 
 </details>
@@ -145,7 +145,7 @@ curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?
 <summary>요청 예 2</summary>
 
 ```
-curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
+curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
 ```
 
 </details>
@@ -204,7 +204,7 @@ curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?
 
 메서드 | URI
 --- | ---
-GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/services
+GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services
 [Path Variable]
 
 | 이름 | 설명 |
@@ -215,7 +215,7 @@ GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/services
 <summary>요청 예 </summary>
 
 ```
-curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-Type: application/json"
+curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-Type: application/json"
 ```
 
 </details>
@@ -287,7 +287,7 @@ curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-T
 
 메서드 | URI
 --- | ---
-GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
+GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 
 [Path Variable]
 
@@ -346,7 +346,7 @@ GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 <summary>요청 예 </summary>
 
 ```
-curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=100&status=running&order=startTime:desc"  -H "Content-Type: application/json"
+curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=100&status=running&order=startTime:desc"  -H "Content-Type: application/json"
 ```
 
 </details>
@@ -363,16 +363,16 @@ curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=100&s
 | data.total | int | O | 100 | 검색된 전체 문서 개수 |
 | data.items[].service | String | O | testserviceid | 해당 색인요청이 발생한 서비스명 |
 | data.items[].id | String | O | 24bb94b3-8a6b-488e-b038-4f6038da2596 | 색인 id |
-| data.items[].filename | String | O | 202106251000_product.jsonl | 색인 파일 이름을 나타냅니다. |
+| data.items[].filename | String | O | 202106251000_product.jsonl | 색인 파일 이름 |
 | data.items[].status | string | O | reserved | 현재 색인 상태를 나타냅니다<br>reserved : 대기<br>running : 진행중 <br>failed : 전체 실패<br/>finished: 완료(부분 실패 포함) |
 | data.items[].reservedTime | unix timestamp | O | 1625098033 | 색인 등록 시간 |
 | data.items[].startTime | unix timestamp | O | 1625098033 | 색인 시작 시간 |
 | data.items[].finishTime | unix timestamp | O | 1625098033 | 색인이 완료된 시간 |
-| data.items[].addCnt | Int | O | 234 | 추가된 문서 갯수입니다. |
-| data.items[].failCnt | Int | O | 31 | 실패한 문서 갯수입니다.<br/>Image Download 실패 등이 포함되며 Fashion Item Detect 실패도 포함됩니다. |
-| data.items[].deleteCnt | Int | O | 31 | 삭제된 문서 갯수입니다. |
-| data.items[].updateCnt | int | O | 592 | 수정된 문서 갯수입니다. |
-| data.items[].totalCnt | Int | O | 888 | 색인 총 문서 갯수입니다. |
+| data.items[].addCnt | Int | O | 234 | 추가된 문서 개수 |
+| data.items[].failCnt | Int | O | 31 | 실패한 문서 개수<br/>Image Download 실패 등이 포함되며, 패션 아이템을 찾지 못한 경우도 포함. |
+| data.items[].deleteCnt | Int | O | 31 | 삭제된 문서 개수 |
+| data.items[].updateCnt | int | O | 592 | 수정된 문서 개수 |
+| data.items[].totalCnt | Int | O | 888 | 색인 총 문서 개수 |
 
 <details>
 <summary>응답 본문 예</summary>
