@@ -1,7 +1,7 @@
 
 ## AI Service > AI Fashion > 검색 API 가이드
 
-* AI Fashion 검색 서비스를 사용하는 데 필요한 API를 설명합니다.
+- AI Fashion 검색 서비스를 사용하는 데 필요한 API를 설명합니다.
 
 ## API 공통 정보
 ### 사전 준비
@@ -22,10 +22,10 @@
 <span id="input-image-guide"></span>
 ### 입력 이미지 가이드
 
-* 입력 이미지를 다운 받는데, 3초 이상 걸리면 실패로 간주합니다.
-* 입력 이미지의 패션 아이템의 너비와 높이가 둘 다 20px 이하인 경우는 인식하지 않습니다.
-* 이미지 크기가 커질수록 패션 아이템의 크기도 커져야 더 정확하게 인식이 가능합니다.
-* 이미지에서 패션 아이템이 차지하는 비중이 클수록 더 정확하게 인식이 가능합니다.
+* 입력 이미지 다운로드에 3초 이상 걸리면 실패로 간주합니다.
+* 입력 이미지 패션 아이템의 너비와 높이가 모두 20px 이하인 경우에는 인식하지 않습니다.
+* 이미지 크기가 커질수록 패션 아이템의 크기도 커져야 더 정확하게 인식할 수 있습니다.
+* 이미지에서 패션 아이템이 차지하는 비중이 클수록 더 정확하게 인식할 수 있습니다.
 * 이미지 최대 크기: 최대 5,000,000 bytes
 * 지원 이미지 포맷: PNG, JPEG, GIF
 
@@ -71,7 +71,7 @@
 ### 서비스 아이디 등록
 
 * 서비스 아이디를 등록할 수 있는 API
-* 최대 5개까지 등록이 가능.
+* 최대 5개까지 등록 가능
 * 허용 문자
     * 영어 소문자, 숫자, '-', '\_' 허용
     * 2\~32 글자 허용
@@ -119,7 +119,7 @@ curl -X POST "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}
 
 </details>
 
-#### Error Codes
+#### 오류 코드
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
@@ -132,7 +132,7 @@ curl -X POST "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}
 ### 서비스 아이디 삭제
 
 * 등록된 서비스 아이디를 삭제할 수 있는 API
-* 등록된 서비스 아이디에 색인 요청이 색인 진행 중에는 서비스 아이디를 삭제 할 수 없습니다.
+* 서비스 아이디에 처리중인 색인 요청이 있는 경우, 서비스 아이디를 삭제할 수 없습니다.
 
 #### 요청
 
@@ -176,14 +176,14 @@ curl -X DELETE "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceI
 
 </details>
 
-#### Error Codes
+#### 오류 코드
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 | -40000 | InvalidParam | 파라미터에 오류가 있음 |
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -42000 | NotExistServiceID | 등록 안 된 서비스 아이디 |
-| -42020 | CannotDeletedOnIndexRunning | 색인 중에는 삭제할 수 없습니다 |
+| -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
+| -42020 | CannotDeletedOnIndexRunning | 색인 중에는 삭제할 수 없음 |
 | -50000 | InternalServerError | 서버 오류 |
 
 ### 서비스 아이디 목록
@@ -221,7 +221,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 5 | 총 검색 결과 개수를 출력합니다. |
+| data.totalCount | Number | O | 5 | 총 검색 결과 개수 |
 | data.items[].serviceID | String | O | my-service | 서비스 아이디 |
 
 <details><summary>응답 본문 예</summary>
@@ -248,7 +248,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 
 </details>
 
-#### Error Codes
+#### 오류 코드
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
@@ -280,7 +280,9 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| limit | int | O | 100 | 최대 크기<br>0 < limit <= 200 |
+| limit | int | O | 100 | 최대 크기<br>1 이상 200 이하로 설정 가능 |
+
+
 
 <details><summary>요청 예</summary>
 
@@ -299,9 +301,9 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 100 | 총 검색 결과 개수를 출력합니다. |
-| data.query | String | O | productID=10234455&limit=100 | 검색 질의를 출력합니다. |
-| data.items[].similarity | Number | O | 0.91234 | 검색 적합도 점수를 출력합니다. |
+| data.totalCount | Number | O | 100 | 총 검색 결과 개수 |
+| data.query | String | O | productID=10234455&limit=100 | 검색 질의 |
+| data.items[].similarity | Number | O | 0.91234 | 검색 적합도 점수 |
 | data.items[].productID | String | O | 8980335 | 상품 아이디 |
 
 <details><summary>응답 본문 예</summary>
@@ -331,17 +333,17 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### Error Codes
+#### 오류 코드
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 | -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -40050 | NotFoundProductIDError | 상품 아이디가 없습니다 |
+| -40050 | NotFoundProductIDError | 상품 아이디가 없음 |
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -42000 | NotExistServiceID | 등록 안 된 서비스 아이디 |
+| -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
 | -50000 | InternalServerError | 서버 오류 |
 
-### detect
+### Detect
 
 * 입력 이미지에서 패션 아이템을 감지하는 API입니다.
 
@@ -364,7 +366,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| path | String | O | `https://imagecdn.co.kr/sample_image.jpg` | URL Encode된 image url |
+| path | String | O | `https://imagecdn.co.kr/sample_image.jpg` | URL Encoding된 이미지의 URL |
 
 <details><summary>요청 예</summary>
 
@@ -383,13 +385,13 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 100 | 총 검색 결과 개수를 출력합니다. |
-| data.query | String | O | `path=https://imagecdn.co.kr/sample_image.jpg` | 검색 질의를 출력합니다. |
-| data.items[].link | String | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | search by image 에서 사용할 링크 |
-| data.items[].center | float64 array | O | [0.825047801147227, 0.330948979591837] | detect 된 아이템의 중앙 x, y 좌표 % |
-| data.items[].b0 | float64 array | O | [0.676864247418738, 0.219377551020408] | detect 된 아이템의 x0, y0 좌표 % |
-| data.items[].b1 | float64 array | O | [0.973231355525813, 0.4426204081632654] | detect 된 아이템의 x1, y1 좌표 % |
-| data.items[].score | float32 | O | 0.9732 | detect 된 아이템의 신뢰도 |
+| data.totalCount | Number | O | 100 | 총 검색 결과 개수 |
+| data.query | String | O | `path=https://imagecdn.co.kr/sample_image.jpg` | 검색 질의 |
+| data.items[].link | String | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | search by image에서 사용할 링크 |
+| data.items[].center | float64 array | O | [0.825047801147227, 0.330948979591837] | 감지된 아이템의 중앙 x, y 좌표 % |
+| data.items[].b0 | float64 array | O | [0.676864247418738, 0.219377551020408] | 감지된 아이템의 x0, y0 좌표 % |
+| data.items[].b1 | float64 array | O | [0.973231355525813, 0.4426204081632654] | 감지된 아이템의 x1, y1 좌표 % |
+| data.items[].score | float32 | O | 0.9732 | 감지된 아이템의 신뢰도 |
 
 <details><summary>응답 본문 예</summary>
 
@@ -426,28 +428,28 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### Error Codes
+#### 오류 코드
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 | -40000 | InvalidParam | 파라미터에 오류가 있음 |
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -42000 | NotExistServiceID | 등록 안 된 서비스 아이디 |
+| -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
 | -45020 | ImageTooLargeException | 이미지 파일의 크기가 너무 큼<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
-| -45040 | InvalidImageFormatException | 이미지 파일이 지원하지 않는 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45040 | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
 | -45050 | InvalidImageURLException | 접근할 수 없는 URL |
 | -45060 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
 | -50000 | InternalServerError | 서버 오류 |
 
-##### Response Code
+##### 응답 코드
 
 * 항상 200
 
-| Status | Description |
+| 상태 | 설명 |
 | --- | --- |
 | 200 | OK |
 
-### search by image
+### Search By Image
 
 * detect api에서 응답으로 받은 link를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
 
@@ -470,8 +472,8 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| limit | int | O | 100 | 최대 크기<br>0 < limit <= 200 |
-| link | string | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | detect API 에서 전달받은 link |
+| limit | int | O | 100 | 최대 크기<br>1 이상 200 이하로 설정 가능 |
+| link | string | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | detect API에서 전달받은 link |
 
 <details><summary>요청 예</summary>
 
@@ -490,9 +492,9 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 100 | 총 검색 결과 개수를 출력합니다. |
-| data.query | String | O | link=eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0=&limit=100 | 검색 질의를 출력합니다. |
-| data.items[].similarity | Number | O | 0.91234 | 검색 적합도 점수를 출력합니다. |
+| data.totalCount | Number | O | 100 | 총 검색 결과 개수 |
+| data.query | String | O | link=eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0=&limit=100 | 검색 질의 |
+| data.items[].similarity | Number | O | 0.91234 | 검색 적합도 점수 |
 | data.items[].productID | String | O | 8980335 | 상품 아이디 |
 
 <details><summary>응답 본문 예</summary>
@@ -522,15 +524,15 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### Error Codes
+#### 오류 코드
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 | -40000 | InvalidParam | 파라미터에 오류가 있음 |
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -42000 | NotExistServiceID | 등록 안 된 서비스 아이디 |
+| -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
 | -45020 | ImageTooLargeException | 이미지 파일의 크기가 너무 큼<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
-| -45040 | InvalidImageFormatException | 이미지 파일이 지원하지 않는 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45040 | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
 | -45050 | InvalidImageURLException | 접근할 수 없는 URL |
 | -45060 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
 | -50000 | InternalServerError | 서버 오류 |
