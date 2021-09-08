@@ -181,7 +181,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 
 </details>
 
-#### Error Codes
+#### 오류 코드
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 | -40000| InvalidParam | 파라미터에 오류가 있음 |
@@ -269,7 +269,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 
 </details>
 
-#### Error Codes
+#### 오류 코드
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
@@ -407,7 +407,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 
 </details>
 
-#### Error Codes
+#### 오류 코드
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
