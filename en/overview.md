@@ -1,37 +1,37 @@
-## AI Service > AI Fashion > 개요
+## AI Service > AI Fashion > Overview
 
-AI Fashion은 다양한 카테고리 상품 데이터를 기반으로 학습하여 패션 분야에 특화된 서비스를 제공합니다.
-상품명이나 속성을 몰라도 이미지만으로 쉽고 빠르게 유사한 상품을 검색할 수 있습니다.
+AI Fashion provides services specialized for the fashion field by learning from product data in various categories.
+It lets users quickly and easily search for similar products with just an image without knowing the product name or properties.
 
-다양한 가격대의 유사 상품을 제시하거나, 원하는 상품의 재고가 없을 때 유사 상품을 추천해 최적의 비즈니스 모델을 구현할 수 있습니다.
+You can implement an optimal business model by presenting similar products in various price ranges or recommending similar products when the desired product is out of stock.
 
-## 주요 기능
+## Main Features
 
-AI Fashion의 주요 기능은 다음과 같습니다.
+The main features of AI Fashion are as follows.
 
-* **Camera Search(카메라 검색)**
-    * 카메라로 직접 촬영해 입력한 이미지에서 패션 상품을 실시간으로 감지하고 분석하여 유사한 상품을 검색하는 기능입니다.
-    * 이미지로부터 다수의 패션 상품을 감지하고 그 영역에 대한 좌표 정보를 반환합니다.
-    * 선택한 영역과 유사한 이미지의 상품을 검색하여 유사도 값이 높은 순서로 정렬합니다.
+* **Camera Search**
+    * This feature searches for similar products by detecting and analyzing fashion products in real time from images taken directly with the camera and provided as an input.
+    * The feature detects multiple fashion items from an image and returns coordinate information for the corresponding areas.
+    * It searches for products with images similar to the selected area and sorts them in the order of the highest similarity value.
 
-* **Similar Item Recommendations(유사 이미지 상품 추천)**
-    * 쇼핑몰에 등록된 상품 이미지와 유사한 이미지의 상품을 검색하여 추천하는 기능입니다.
-    * 상품의 이미지뿐만 아니라 카테고리 정보를 활용하여 원하는 카테고리에 속한 상품만 필터링하여 추천할 수 있습니다.
+* **Similar Item Recommendations**
+    * This feature searches for and recommends products with images similar to those registered in the shopping mall.
+    * In addition to product images, you can use category information to filter and recommend only the products belonging to a desired category.
 
-* **Deep Tagging(딥 태깅)** - 출시 예정
-    * 이미지로부터 카테고리, 색상, 소재, 패턴 등 다양한 속성 정보를 분석하여 반환합니다.
-    * 상품 등록 관리 시스템에 연동하여 빠르고 정확한 상품 정보를 입력할 수 있고, 섬세한 검색 필터 구현에 활용할 수 있습니다.
+* **Deep Tagging** - To be released
+    * This feature analyzes the image and returns various property information such as category, color, material, and pattern.
+    * By integrating with the product registration management system, you can enter product information quickly and accurately and use it to implement a detailed search filter.
 
-## 서비스 대상
+## Service Targets
 
-* 온라인 쇼핑몰에서 이미지 기반의 검색 서비스를 구축하려는 경우
-* 챗봇 서비스에 카메라 검색을 연동하여 상품 검색 기능을 제공하려는 경우
-* 상품 상세 페이지에서 유사한 상품을 추천하려는 경우
-* 품절 상품의 대체재를 검색하여 추천하려는 경우
+* Customers who want to build an image-based search service in the online shopping mall
+* Customers who want to provide a product search feature by integrating camera search with a chatbot service
+* Customers who want to recommend similar products on the product detail page
+* Customers who want to search for and recommend an alternative product for an out-of-stock product
 
-## 개인정보 처리에 대한 안내
+## Information on Processing of Personal Information
 
-- AI Fashion 서비스를 이용하는 과정에서 고객은 이용자의 개인정보 및 민감 정보를 수집할 수 있습니다. 따라서 본 서비스를 이용하는 고객은 개인정보보호법에 따라 이용자에게 법적 고지 사항을 알리고 동의를 받아야 합니다. 또한, 이 과정에서 고객과 NHN 간 개인정보 처리에 관한 업무 위수탁 관계가 발생할 수 있습니다. 위탁자의 지위에 있는 고객은 수탁사인 NHN과 별도 서면에 의한 위탁 계약을 체결할 수 있으며 고객이 운영하는 개인정보처리방침에 아래 내용을 참고하여 고지할 수 있습니다.
+- While using the AI ​​Fashion service, customers may collect personal and sensitive information from users. Therefore, customers of this service must notify users of legal notices and obtain consent in accordance with the Personal Information Protection Act. In addition, during this process, a business consignment relationship may occur between the customer and NHN regarding the processing of personal information. A customer who is in the position of the consignor may enter into a consignment contract by separate writing with NHN, the consignee, and may notify the following in the privacy policy operated by the customer.
 
-	\- 수탁 업체: 엔에이치엔㈜
-	\- 위탁 업무의 내용: AI Fashion 서비스 제공 업무
+    \- Consignee: NHN
+    \- Consignment description: Providing AI Fashion service
