@@ -153,7 +153,7 @@ curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./maker-api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -223,7 +223,7 @@ curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-T
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./maker-api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -354,7 +354,7 @@ curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=100&s
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./maker-api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](#common-response)で確認可能
 
 [レスポンス本文データ]
 

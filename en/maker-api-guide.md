@@ -153,7 +153,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 #### Response
 
 * [Response Body Header description omitted]
-    * This information is available in [Response Common Information](./maker-api-guide/#common-response).
+    * This information is available in [Response Common Information](#common-response).
 
 [Response Body Data]
 
@@ -223,7 +223,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 #### Response
 
 * [Response Body Header description omitted]
-    * This information is available in [Response Common Information](./maker-api-guide/#common-response).
+    * This information is available in [Response Common Information](#common-response).
 
 [Response Body Data]
 
@@ -302,7 +302,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 | --- | --- | --- | --- | --- |
 | start | int | O | 0 | Start index.<br/>Starts from 0. |
 | limit | int | O | 100 | Max 100.<br/>start:0, limit:100 indicates 1-100. <br/>start:200, limit:100 indicates 201-300. |
-| order | string | X | "reservedTime:desc" | (Default ) In descending order of the registration time<br/>Only one condition can be set<br/>For conditions that can set, see ['Sorting'](./maker-api-guide/#indexes_status_order) |
+| order | string | X | "reservedTime:desc" | (Default ) In descending order of the registration time<br/>Only one condition can be set<br/>For conditions that can set, see ['Sorting'](#indexes-status-order) |
 | status | string | X | "finished" | Status value of indexing |
 
 #### paging
@@ -318,7 +318,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
         * end: 100
         * This is not supported because the number exceeds the maximum number for paging, 1000.
 
-<span id="indexes_status_order"></span>
+<span id="indexes-status-order"></span>
 #### Sorting
 * Sorting parameter of the response document
 * Parameter format.
@@ -355,7 +355,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 #### Response
 
 * [Response Body Header description omitted]
-    * This information is available in [Response Common Information](./maker-api-guide/#common-response).
+    * This information is available in [Response Common Information](#common-response).
 
 [Response Body Data]
 

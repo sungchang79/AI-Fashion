@@ -153,7 +153,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./maker-api-guide/#common-response)에서 확인 가능
+    * [응답 공통 정보](#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -223,7 +223,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./maker-api-guide/#common-response)에서 확인 가능
+    * [응답 공통 정보](#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -302,7 +302,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 | --- | --- | --- | --- | --- |
 | start | int | O | 0 | 시작 인덱스<br/>0부터 시작 |
 | limit | int | O | 100 | 최대 100<br/>start:0, limit:100의 경우 1부터 100까지<br/>start:200, limit:100 이면 201부터 300까지 |
-| order | string | X | "reservedTime:desc" | (기본값)등록 시간 내림 차순<br/>조건 1개만 설정 가능<br/>설정 가능 조건은 ['정렬'](./maker-api-guide/#indexes_status_order) 참조 |
+| order | string | X | "reservedTime:desc" | (기본값)등록 시간 내림 차순<br/>조건 1개만 설정 가능<br/>설정 가능 조건은 ['정렬'](#indexes-status-order) 참조 |
 | status | string | X | "finished" | 색인의 상탯값 |
 
 #### paging
@@ -318,7 +318,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
         * end: 100
         * 최대 가능 페이징 수인 1000을 넘어가기 때문에 불가능합니다.
 
-<span id="indexes_status_order"></span>
+<span id="indexes-status-order"></span>
 #### 정렬
 * 응답 문서의 정렬 파라미터
 * 파라미터 형식. 
@@ -355,7 +355,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./maker-api-guide/#common-response)에서 확인 가능
+    * [응답 공통 정보](#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
