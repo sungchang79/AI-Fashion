@@ -130,7 +130,7 @@ POST | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | link | string | △ | "https://cdn.my-domain.com/202106251000_product.jsonl" | 데이터 파일 URL |
-| file | file | △ | @filename | 데이터 퍼일<br/>link가 file보다 우선 순위가 높아서 link가 있으면 file은 무시됨 |
+| file | file | △ | @filename | 데이터 파일<br/>link가 file보다 우선 순위가 높아서 link가 있으면 file은 무시됨 |
 
 <details>
 <summary>요청 예 1</summary>
