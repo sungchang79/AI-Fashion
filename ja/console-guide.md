@@ -9,6 +9,7 @@ AI Fashionのカメラ検索、類似画像商品の推薦機能はAPIで提供�
 
 ### サービス作成
 サービスは次のような方法で作成できます。
+![create](http://static.toastoven.net/prod_ai_fashion/create_service_jp.png)
 1. サービス作成をクリック
 2. サービス名を入力
    - 英字小文字、数字および_(アンダースコア)と -(ハイフン)のみ使用できます。
@@ -18,6 +19,7 @@ AI Fashionのカメラ検索、類似画像商品の推薦機能はAPIで提供�
 
 ### サービス削除
 サービスは、次のような方法で削除できます。
+![delete](http://static.toastoven.net/prod_ai_fashion/delete_service_jp.png)
 1. サービスリストから削除したいサービスの削除ボタンをクリック
    - インデックスが進行中のサービスは削除できません。
 2. ポップアップウィンドウで確認ボタンをクリック
@@ -26,9 +28,11 @@ AI Fashionのカメラ検索、類似画像商品の推薦機能はAPIで提供�
 
 ### インデックス状況
 サービスリストから選択したサービスのインデックス状況を確認できます。
+![indexStatus](http://static.toastoven.net/prod_ai_fashion/index_status_jp.png)
 - 最近のログ順に30個まで表示されます。
 
 ### 検索統計
-検索統計タブをクリックすると、カメラ検索、類似画像商品推薦QCをチャートで確認できます。 
+検索統計タブをクリックすると、カメラ検索、類似画像商品推薦QCをチャートで確認できます。
+![searchStats](http://static.toastoven.net/prod_ai_fashion/search_stats_jp.png)
 - 前日から最近3か月間の検索QCを確認できます。
 - xls、csv、png、jpeg形式でファイルをダウンロードできます。
