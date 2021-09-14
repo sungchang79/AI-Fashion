@@ -12,7 +12,7 @@
 ### 색인 입력 파일 정보
 * utf-8로 인코딩된 .jsonl, .csv 파일 형식을 지원합니다.
     * .csv 파일을 작성할 때는 첫 줄부터 실제 데이터로 채워야 합니다.
-    * 파일에 빈 라인이 없어야 합니다.
+    * 파일에 빈 줄이 없어야 합니다.
 * 파일 크기는 최대 20MB 까지 가능하고, 최대 허용 문서 수는 10,000개입니다.
 * 1일 최대 4회까지 업로드가 가능하며 매일 한국 시간 0시에 초기화됩니다.
 * Service ID 당 색인 가능한 최대 문서 수는 100,000개입니다.
@@ -191,7 +191,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -40030| ExceedDataSizeError | 전달된 파일이 정해진 용량 또는 정해진 데이터 개수를 초과한 경우 |
 | -40040| IndexQuotaExceededException | 1일 요청 횟수를 초과한 경우 |
 | -40080| TooManyRequestError | 동시에 여러 번 요청을 한 경우 |
-| -40400| NoApiFound | 정의되지 않은 api로 요청한 경우 |
+| -40400| NoApiFound | 정의되지 않은 API로 요청한 경우 |
 | -41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -50000| InternalServerError | 서버 오류 |
 
@@ -276,7 +276,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 | -40000| InvalidParam | 파라미터에 오류가 있음 |
-| -40400| NoApiFound | 정의되지 않은 api로 요청한 경우 |
+| -40400| NoApiFound | 정의되지 않은 API로 요청한 경우 |
 | -41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -50000| InternalServerError | 서버 오류 |
 
@@ -415,6 +415,6 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 | -40000| InvalidParam | 파라미터에 오류가 있음 |
-| -40400| NoApiFound | 정의되지 않은 api로 요청한 경우 |
+| -40400| NoApiFound | 정의되지 않은 API로 요청한 경우 |
 | -41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -50000| InternalServerError | 서버 오류 |
