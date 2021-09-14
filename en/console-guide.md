@@ -17,6 +17,7 @@ The following describes how to use the console.
 3. Click **Save**.
 
 ### Delete Services
+![delete](http://static.toastoven.net/prod_ai_fashion/delete_service_en.png)
 1. From the service list, click the **Delete** button of the service to delete.
    - Services that are being indexed cannot be deleted.
 2. When the **Delete** dialog box appears, click the **Confirm** button.
