@@ -74,12 +74,12 @@
 | Name | field | value type | Required | max length | Note |
 | -- | -- | -- | -- | -- | -- |
 | Product ID | product_id | string | O | 72 | unique key |
-| Status |  status | string | O | 7 | enable: Add or update <br/>disable: Delete  |
-| Product name |  name | string |O |  256 | Product name |
-| Category depth 1 |  category1_id | string | O | 72 | Category depth 1 ID|
-| Category depth 2 |  category2_id | string | O | 72 | Category depth 2 ID |
-| Category depth 3 |  category3_id | string | O | 72 | Category depth 3 ID |
-| Image URL |  image_url | string |O |  1000 | Accessible image URL  |
+| Status | status | string | O | 7 | enable: Add or update <br/>disable: Delete |
+| Product name | name | string | O | 256 | Product name |
+| Category depth 1 | category1_id | string | O | 72 | Category depth 1 ID |
+| Category depth 2 | category2_id | string | O | 72 | Category depth 2 ID |
+| Category depth 3 | category3_id | string | O | 72 | Category depth 3 ID |
+| Image URL | image_url | string | O | 1000 | Accessible image URL |
 
 ##### Image Guide
 
@@ -184,14 +184,15 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 #### Error Codes
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
-| -40000| InvalidParam | There is an error in the parameter. |
-| -40010| InvalidFileError | There is an error in the file transfer. |
-| -40020| NoDataError | The provided file is empty. |
-| -40030| ExceedDataSizeError | The provided file exceeds the file size limit or data count limit. |
-| -40040| IndexQuotaExceededException | Daily quota for request has been exceeded. |
-| -40080| TooManyRequestError | Multiple requests occurred simultaneously. |
-| -41000| UnauthorizedAppKey | Unauthorized Appkey. |
-| -50000| InternalServerError | Server error. |
+| -40000 | InvalidParam | There is an error in the parameter. |
+| -40010 | InvalidFileError | There is an error in the file transfer. |
+| -40020 | NoDataError | The provided file is empty. |
+| -40030 | ExceedDataSizeError | The provided file exceeds the file size limit or data count limit. |
+| -40040 | IndexQuotaExceededException | Daily quota for request has been exceeded. |
+| -40080 | TooManyRequestError | Multiple requests occurred simultaneously. |
+| -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
+| -42000 | NotExistServiceID | Unregistered service ID. |
+| -50000 | InternalServerError | Server error. |
 
 ### Service Information
 * Check the current information of services.
@@ -273,9 +274,9 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
-| -40000| InvalidParam | There is an error in the parameter. |
-| -41000| UnauthorizedAppKey | Unauthorized Appkey. |
-| -50000| InternalServerError | Server error. |
+| -40000 | InvalidParam | There is an error in the parameter. |
+| -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
+| -50000 | InternalServerError | Server error. |
 
 ### Indexing Status Query
 * Check the current status of requested indexing.
@@ -411,6 +412,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
-| -40000| InvalidParam | There is an error in the parameter. |
-| -41000| UnauthorizedAppKey | Unauthorized Appkey. |
-| -50000| InternalServerError | Server error. |
+| -40000 | InvalidParam | There is an error in the parameter. |
+| -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
+| -42000 | NotExistServiceID | Unregistered service ID. |
+| -50000 | InternalServerError | Server error. |
