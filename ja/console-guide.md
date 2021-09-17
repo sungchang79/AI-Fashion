@@ -33,4 +33,4 @@ AI Fashionのカメラ検索、類似画像商品の推薦機能はAPIで提供�
 **検索統計**タブをクリックすると、カメラ検索と類似画像商品推薦のQC(Query Count、APIを呼び出した回数)をチャートで確認できます。
 ![searchStats](http://static.toastoven.net/prod_ai_fashion/search_stats_jp.png)
 - 前日から最近3か月間の検索QCを確認できます。
-- xls、csv、png、jpeg形式でファイルをダウンロードできます。
+- .xls、.csv、.png、.jpeg形式でファイルをダウンロードできます。
