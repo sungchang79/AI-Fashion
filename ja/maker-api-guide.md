@@ -10,8 +10,8 @@
     * サービスAppkeyはコンソール上部の**URL & Appkey**メニューで確認が可能です。
 
 ### インデックス入力ファイル情報
-* utf-8でエンコードされたjsonl、csvファイルフォーマットをサポートします。
-    * csvファイルの場合、最初の行から実際のデータで埋める必要があります。
+* utf-8でエンコードされたjsonl、csvファイル形式をサポートします。
+    * .csvファイルを作成する時は、最初の行から実際のデータで埋める必要があります。
 * ファイルサイズは最大20MBまで可能で、最大許可文書数は10,000個です。
 * 1日最大4回までアップロードが可能で、毎日日本時間0時に初期化されます。
 * Service IDごとにインデックス可能な最大文書数は100,000個です。
@@ -33,9 +33,9 @@
 
 | 名前 | タイプ | 説明 |
 | --- | --- | --- |
-| header.isSuccessful | boolean | true：正常<br>false：エラー |
-| header.resultCode | int | 0：正常<br>0より大きい：部分成功<br>負の数：エラー |
-| header.resultMessage | string | "SUCCESS"：正常<br>その他：エラーメッセージを返す |
+| header.isSuccessful | boolean | true：正常<br/>false：エラー |
+| header.resultCode | int | 0：正常<br/>0より大きい：部分成功<br/>負の数：エラー |
+| header.resultMessage | string | "SUCCESS"：正常<br/>その他：エラーメッセージを返す |
 
 [成功レスポンス本文例]
 
@@ -63,7 +63,7 @@
 
 ## API目次
 
-### Index
+### インデックスリクエスト
 
 * インデックスを作成するデータを伝達します。
 * 伝達されたファイルの最初の行を分析してフォーマットエラーがないかをチェックします。
@@ -73,12 +73,12 @@
 
 | 名前 | field | value type | 必須 | max length | 備考 |
 | -- | -- | -- | -- | -- | -- |
-| 商品id | product_id | string | O | 72 | unique key |
+| 商品ID | product_id | string | O | 72 | unique key |
 | 状態 |  status | string | O | 7 | enable：追加またはアップデート <br/>disable：削除 |
 | 商品名 |  name | string |O |  256 | 商品名 |
-| カテゴリー1デプス |  category1_id | string | O | 72 | カテゴリー1デプスID|
-| カテゴリー2デプス |  category2_id | string | O | 72 | カテゴリー2デプスID |
-| カテゴリー3デプス |  category3_id | string | O | 72 | カテゴリー3デプスID |
+| カテゴリー1depth |  category1_id | string | O | 72 | カテゴリー1depthID|
+| カテゴリー2depth |  category2_id | string | O | 72 | カテゴリー2depthID |
+| カテゴリー3depth |  category3_id | string | O | 72 | カテゴリー3depthID |
 | 画像url |  image_url | string |O |  1000 | アクセス可能な画像URL  |
 
 ##### 画像ガイド
@@ -104,7 +104,7 @@
 ```
 
 #### リクエスト
-* 直接データファイルを転送するか、ダウンロード可能なurlを伝達してデータファイルを伝達できます。
+* 直接データファイルを転送するか、ダウンロード可能なURLでデータファイルを伝達できます。
 
 [URI]
 
@@ -129,14 +129,14 @@ POST | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index
 
 | 名前 | タイプ | 必須かどうか | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| link | string |  | "https://cdn.my-domain.com/202106251000_product.jsonl" | データファイルリンク<br>linkがfileより優先順位が高い。<br>linkがある場合は、fileは無視されます |
-| file | file |  | @filename | データファイル <br>linkがfileより優先順位が高い。<br>linkがある場合、fileは無視されます |
+| link | string | △ | "https://cdn.my-domain.com/202106251000_product.jsonl" | データファイルURL |
+| file | file | △ | @filename | データファイル<br/>linkがfileより優先順位が高いため、linkがある場合はfileが無視される |
 
 <details>
 <summary>リクエスト例1</summary>
 
 ```
-curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -H "Content-Type: multipart/form-file" -F "file=@/home/user1/202106251000_product.jsonl"
+curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -H "Content-Type: multipart/form-file" -F "file=@/home/user1/202106251000_product.jsonl"
 ```
 
 </details>
@@ -145,7 +145,7 @@ curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?
 <summary>リクエスト例2</summary>
 
 ```
-curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
+curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
 ```
 
 </details>
@@ -181,7 +181,7 @@ curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?
 
 </details>
 
-#### Error Codes
+#### エラーコード
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
 | -40000| InvalidParam | パラメータにエラーがある |
@@ -193,7 +193,7 @@ curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?
 | -41000| UnauthorizedAppKey | 承認されていないAppkey |
 | -50000| InternalServerError | サーバーエラー |
 
-### service info
+### サービス情報
 * サービスの現在情報を確認します。 
     * サービス別の残りインデックス回数
     * サービス別のインデックスされた文書数
@@ -204,7 +204,7 @@ curl -X POST "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?
 
 メソッド | URI
 --- | ---
-GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/services
+GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services
 [Path Variable]
 
 | 名前 | 説明 |
@@ -215,7 +215,7 @@ GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/services
 <summary>リクエスト例 </summary>
 
 ```
-curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-Type: application/json"
+curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-Type: application/json"
 ```
 
 </details>
@@ -231,7 +231,7 @@ curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-T
 | --- | --- | --- | --- | --- |
 | data.totalService | int | O | 3 | サービス数 |
 | data.items[].documentCnt | int | O | 51128 | 全ての文書数 |
-| data.items[].remainInsertCnt | int | O | 3 | Index可能回数 |
+| data.items[].remainInsertCnt | int | O | 3 | 残りデイリーインデックスリクエスト可能回数 |
 | data.items[].service | string | O | aaa | 商品で登録したservice_id |
 
 <details>
@@ -269,7 +269,7 @@ curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-T
 
 </details>
 
-#### Error Codes
+#### エラーコード
 
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
@@ -277,9 +277,9 @@ curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-T
 | -41000| UnauthorizedAppKey | 承認されていないAppkey |
 | -50000| InternalServerError | サーバーエラー |
 
-### Indexes Status
-* Indexの現在状態を確認します。 
-* index status最大保管期間は登録時間基準6か月です。
+### インデックス状態照会
+* リクエストされたインデックスの現現在状態を確認します。 
+* インデックス状態の最大保管期間は登録時間基準6か月です。
 
 #### リクエスト
 
@@ -287,7 +287,7 @@ curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-T
 
 メソッド | URI
 --- | ---
-GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
+GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 
 [Path Variable]
 
@@ -300,9 +300,9 @@ GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| start | int | O | 0 | 開始index。<br>0から開始。 |
-| limit | int | O | 100 | 最大100。<br>start：0、limit：100の場合1から100まで。 <br>start：200、limit：100の場合、201から300まで。 |
-| order | string | X | "reservedTime:desc" | 基本値。登録時間降順。ソート条件は最大1個可能 |
+| start | int | O | 0 | 開始インデックス<br/>0から開始 |
+| limit | int | O | 100 | 最大100<br/>start:0、limit:100の場合は1から100まで<br/>start:200、limit:100の場合は201から300まで |
+| order | string | X | "reservedTime:desc" | (デフォルト値)登録時間降順<br/>1つの条件のみ設定可能<br/>設定可能な条件は[ソート](#indexes-status-order)を参照 |
 | status | string | X | "finished" | インデックスの状態値 |
 
 #### paging
@@ -318,12 +318,13 @@ GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
         * end：100
         * 最大ページング可能数である1000を超えるため不可能です。
 
+<span id="indexes-status-order"></span>
 #### ソート
 * レスポンス文書のソートパラメータ
 * パラメータ形式。 
-    * `ソート可能項目`：`ソート方式`
+    * {ソート可能項目}：{ソート方式}
 * ソート可能項目
-    * reservedTime：index登録時間
+    * reservedTime：インデックスリクエスト登録時間
     * startTime：インデックス開始時間
     * finishTime：インデックス終了時間
     * addCnt：追加された文書数
@@ -346,7 +347,7 @@ GET | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 <summary>リクエスト例 </summary>
 
 ```
-curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=100&status=running&order=startTime:desc"  -H "Content-Type: application/json"
+curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=100&status=running&order=startTime:desc"  -H "Content-Type: application/json"
 ```
 
 </details>
@@ -362,14 +363,14 @@ curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=100&s
 | --- | --- | --- | --- | --- |
 | data.total | int | O | 100 | 検索された文書の総数 |
 | data.items[].service | String | O | testserviceid | 該当インデックスリクエストが発生したサービス名 |
-| data.items[].id | String | O | 24bb94b3-8a6b-488e-b038-4f6038da2596 | インデックスid |
-| data.items[].filename | String | O | 202106251000_product.jsonl | インデックスファイル名を表します。 |
-| data.items[].status | string | O | reserved | 現在のインデックス状態を表します。<br>reserved：待機<br>running：進行中 <br>failed：全て失敗<br/>finished：完了(部分失敗を含む) |
+| data.items[].id | String | O | 24bb94b3-8a6b-488e-b038-4f6038da2596 | インデックスID |
+| data.items[].filename | String | O | 202106251000_product.jsonl | インデックスファイル名 |
+| data.items[].status | string | O | reserved | 現在のインデックス状態を表します。<br/>reserved：待機<br/>running：進行中 <br>failed：全て失敗<br/>finished：完了(部分失敗を含む) |
 | data.items[].reservedTime | unix timestamp | O | 1625098033 | インデックス登録時間 |
 | data.items[].startTime | unix timestamp | O | 1625098033 | インデックス開始時間 |
 | data.items[].finishTime | unix timestamp | O | 1625098033 | インデックスが完了した時間 |
 | data.items[].addCnt | Int | O | 234 | 追加された文書数です。 |
-| data.items[].failCnt | Int | O | 31 | 失敗した文書数です。<br/>Image Download失敗などが含まれ、Fashion Item Detect失敗も含まれます。 |
+| data.items[].failCnt | Int | O | 31 | 失敗した文書の数<br/>Image Download失敗などが含まれ、ファッションアイテムが見つからなかった場合も含まれる。 |
 | data.items[].deleteCnt | Int | O | 31 | 削除された文書数です。 |
 | data.items[].updateCnt | int | O | 592 | 修正された文書数です。 |
 | data.items[].totalCnt | Int | O | 888 | インデックス文書総数です。 |
@@ -406,7 +407,7 @@ curl -X GET "/ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=100&s
 
 </details>
 
-#### Error Codes
+#### エラーコード
 
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
