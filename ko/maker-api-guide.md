@@ -185,15 +185,16 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 #### 오류 코드
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000| InvalidParam | 파라미터에 오류가 있음 |
-| -40010| InvalidFileError | 파일 전달에 오류가 있는 경우 |
-| -40020| NoDataError | 전달된 파일이 빈 파일인 경우 |
-| -40030| ExceedDataSizeError | 전달된 파일이 정해진 용량 또는 정해진 데이터 개수를 초과한 경우 |
-| -40040| IndexQuotaExceededException | 1일 요청 횟수를 초과한 경우 |
-| -40080| TooManyRequestError | 동시에 여러 번 요청을 한 경우 |
-| -40400| NoApiFound | 정의되지 않은 API로 요청한 경우 |
-| -41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -50000| InternalServerError | 서버 오류 |
+| -40000 | InvalidParam | 파라미터에 오류가 있음 |
+| -40010 | InvalidFileError | 파일 전달에 오류가 있는 경우 |
+| -40020 | NoDataError | 전달된 파일이 빈 파일인 경우 |
+| -40030 | ExceedDataSizeError | 전달된 파일이 정해진 용량 또는 정해진 데이터 개수를 초과한 경우 |
+| -40040 | IndexQuotaExceededException | 1일 요청 횟수를 초과한 경우 |
+| -40080 | TooManyRequestError | 동시에 여러 번 요청을 한 경우 |
+| -40400 | NoApiFound | 정의되지 않은 API로 요청한 경우 |
+| -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
+| -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
+| -50000 | InternalServerError | 서버 오류 |
 
 ### 서비스 정보
 * 서비스들의 현재 정보를 확인합니다. 
@@ -275,10 +276,10 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000| InvalidParam | 파라미터에 오류가 있음 |
-| -40400| NoApiFound | 정의되지 않은 API로 요청한 경우 |
-| -41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -50000| InternalServerError | 서버 오류 |
+| -40000 | InvalidParam | 파라미터에 오류가 있음 |
+| -40400 | NoApiFound | 정의되지 않은 API로 요청한 경우 |
+| -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
+| -50000 | InternalServerError | 서버 오류 |
 
 ### 색인 상태 조회
 * 요청된 색인들의 현재 상태를 확인합니다. 
@@ -414,7 +415,8 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000| InvalidParam | 파라미터에 오류가 있음 |
-| -40400| NoApiFound | 정의되지 않은 API로 요청한 경우 |
-| -41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -50000| InternalServerError | 서버 오류 |
+| -40000 | InvalidParam | 파라미터에 오류가 있음 |
+| -40400 | NoApiFound | 정의되지 않은 API로 요청한 경우 |
+| -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
+| -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
+| -50000 | InternalServerError | 서버 오류 |
