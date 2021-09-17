@@ -1,98 +1,97 @@
+## AI Service > AI Fashion > 検索APIガイド
 
-## AI Service > AI Fashion > 검색 API 가이드
+- AI Fashion検索サービスを使用するために必要なAPIを説明します。
 
-- AI Fashion 검색 서비스를 사용하는 데 필요한 API를 설명합니다.
+## API共通情報
+### 事前準備
+- APIを使用するにはプロジェクト統合AppkeyまたはサービスAppkeyが必要です。
+    - プロジェクト統合Appkeyを使用することを推奨します。
+    - プロジェクト統合Appkeyはプロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
+    * サービスAppkeyはコンソール上部の**URL & Appkey**メニューで確認が可能です。
 
-## API 공통 정보
-### 사전 준비
-- API 사용을 위해서는 프로젝트 통합 Appkey 또는 서비스 Appkey가 필요합니다. 
-    - 프로젝트 통합 Appkey 사용을 권장합니다.
-    - 프로젝트 통합 Appkey는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
-    - 서비스 Appkey는 콘솔 상단 **URL & Appkey** 메뉴에서 확인이 가능합니다.
+### リクエスト共通情報
+- APIを使用するにはセキュリティキー認証処理が必要です。
 
-### 요청 공통 정보
-- API를 사용하기 위해서는 보안 키 인증 처리가 필요합니다.
+[APIドメイン]
 
-[API 도메인]
-
-| 환경 | 도메인 |
+| 環境 | ドメイン |
 | --- | --- |
 | Real | https://ai-fashion.cloud.toast.com |
 
 <span id="input-image-guide"></span>
-### 입력 이미지 가이드
+### 入力画像ガイド
 
-* 입력 이미지 다운로드에 3초 이상 걸리면 실패로 간주합니다.
-* 입력 이미지 패션 아이템의 너비와 높이가 모두 20px 이하인 경우에는 인식하지 않습니다.
-* 이미지 크기가 커질수록 패션 아이템의 크기도 커져야 더 정확하게 인식할 수 있습니다.
-* 이미지에서 패션 아이템이 차지하는 비중이 클수록 더 정확하게 인식할 수 있습니다.
-* 이미지 최대 크기: 최대 5,000,000 bytes
-* 지원 이미지 포맷: PNG, JPEG, GIF
+* 入力画像のダウンロードに3秒以上かかる場合は失敗とみなします。
+* 入力イ画像ファッションアイテムの幅と高さがどちらも20px以下の場合は認識しません。
+* 画像サイズの大きさに比例してファッションアイテムのサイズも大きくすると正確に認識できます。
+* 画像内でファッションアイテムが占める割合が大きいほど正確に認識できます。
+* 画像最大サイズ：最大5,000,000 bytes
+* サポート画像フォーマット：PNG、JPEG、GIF
 
 <span id="common-response"></span>
-### 응답 공통 정보
+### レスポンス共通情報
 
-- 모든 API 요청에 '200 OK'로 응답합니다. 자세한 응답 결과는 응답 본문 헤더를 참고합니다.
+- すべてのAPIリクエストに「200 OK」でレスポンスします。詳細なレスポンス結果はレスポンス本文ヘッダを参照します。
 
-[응답 본문 헤더]
+[レスポンス本文ヘッダ]
 
-| 이름 | 타입 | 설명 |
+| 名前 | タイプ | 説明 |
 | --- | --- | --- |
-| header.isSuccessful | boolean | true: 정상<br>false: 오류 |
-| header.resultCode | int | 0: 정상<br>0보다 큼: 부분 성공<br>음수: 오류 |
-| header.resultMessage | string | "SUCCESS": 정상<br>그 외: 오류 메시지 반환 |
+| header.isSuccessful | boolean | true：正常<br>false：エラー |
+| header.resultCode | int | 0：正常<br>0より大きい：部分成功<br>負の数：エラー |
+| header.resultMessage | string | "SUCCESS"：正常<br>その他：エラーメッセージを返す |
 
-[성공 응답 본문 예]
-
-```json
-{
-	"header": {
-		"isSuccessful": true,
-		"resultCode": 0,
-		"resultMessage": "SUCCESS"
-	}
-}
-```
-
-[실패 응답 본문 예]
+[成功レスポンス本文例]
 
 ```json
 {
-	"header": {
-		"isSuccessful": false,
-		"resultCode": -40000,
-		"resultMessage": "InvalidParam"
-	}
+        "header": {
+                "isSuccessful": true,
+                "resultCode": 0,
+                "resultMessage": "SUCCESS"
+        }
 }
 ```
 
-## API 목차
+[失敗レスポンス本文例]
 
-### 서비스 아이디 등록
+```json
+{
+        "header": {
+                "isSuccessful": false,
+                "resultCode": -40000,
+                "resultMessage": "InvalidParam"
+        }
+}
+```
 
-* 서비스 아이디를 등록할 수 있는 API
-* 최대 5개까지 등록 가능
-* 허용 문자
-    * 영어 소문자, 숫자, '-', '\_' 허용
-    * 2~32 글자 허용
-    * 첫 글자는 영어 소문자만 허용
+## API目次
 
-#### 요청
+### サービスID登録
+
+* サービスIDを登録することができるAPI
+* 最大5個まで登録可能
+* 許可文字
+    * 英字小文字、数字、(-)、(_)許可
+    * 2～32文字まで許可
+    * 最初の文字は英字小文字のみ許可
+
+#### リクエスト
 
 [URI]
 
-| 메서드 | URI |
+| メソッド | URI |
 | --- | --- |
 | POST | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID} |
 
 [Path Variable]
 
-| 이름 | 설명 |
+| 名前 | 説明 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
-| serviceID | 서비스 아이디 |
+| appKey | 統合AppkeyまたはサービスAppkey |
+| serviceID | サービスID |
 
-<details><summary>요청 예</summary>
+<details><summary>リクエスト例</summary>
 
 ```
 curl -X POST "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}"
@@ -100,12 +99,12 @@ curl -X POST "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}
 
 </details>
 
-#### 응답
+#### レスポンス
 
-* [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+* [レスポンス本文ヘッダ説明省略]
+    * [レスポンス共通情報](./service-api-guide/#common-response)で確認可能
 
-<details><summary>응답 본문 예</summary>
+<details><summary>レスポンス本文例</summary>
 
 ``` json
 {
@@ -119,37 +118,37 @@ curl -X POST "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}
 
 </details>
 
-#### 오류 코드
+#### エラーコード
 
-| resultCode | resultMessage | 설명 |
+| resultCode | resultMessage | 説明 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -42010 | DuplicateServiceID | 중복된 서비스 아이디 |
-| -42030 | ServiceIDQuotaExceededException | 허용된 서비스 아이디 개수 초과 |
-| -50000 | InternalServerError | 서버 오류 |
+| -40000 | InvalidParam | パラメータにエラーがある |
+| -41000 | UnauthorizedAppKey | 承認されていないAppkey |
+| -42010 | DuplicateServiceID | 重複するサービスID |
+| -42030 | ServiceIDQuotaExceededException | 許可されたサービスID数超過 |
+| -50000 | InternalServerError | サーバーエラー |
 
-### 서비스 아이디 삭제
+### サービスID削除
 
-* 등록된 서비스 아이디를 삭제할 수 있는 API
-* 서비스 아이디에 처리중인 색인 요청이 있는 경우, 서비스 아이디를 삭제할 수 없습니다.
+* 登録されたサービスIDを削除することができるAPI
+* サービスIDに処理中のインデックスリクエストがある場合は、サービスIDを削除できません。
 
-#### 요청
+#### リクエスト
 
 [URI]
 
-| 메서드 | URI |
+| メソッド | URI |
 | --- | --- |
 | DELETE | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID} |
 
 [Path Variable]
 
-| 이름 | 설명 |
+| 名前 | 説明 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
-| serviceID | 서비스 아이디 |
+| appKey | 統合AppkeyまたはサービスAppkey |
+| serviceID | サービスID |
 
-<details><summary>요청 예</summary>
+<details><summary>リクエスト例</summary>
 
 ```
 curl -X DELETE "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}"
@@ -157,12 +156,12 @@ curl -X DELETE "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceI
 
 </details>
 
-#### 응답
+#### レスポンス
 
-* [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+* [レスポンス本文ヘッダ説明省略]
+    * [レスポンス共通情報](./service-api-guide/#common-response)で確認可能
 
-<details><summary>응답 본문 예</summary>
+<details><summary>レスポンス本文例</summary>
 
 ``` json
 {
@@ -176,35 +175,35 @@ curl -X DELETE "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceI
 
 </details>
 
-#### 오류 코드
+#### エラーコード
 
-| resultCode | resultMessage | 설명 |
+| resultCode | resultMessage | 説明 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
-| -42020 | CannotDeletedOnIndexRunning | 색인 중에는 삭제할 수 없음 |
-| -50000 | InternalServerError | 서버 오류 |
+| -40000 | InvalidParam | パラメータにエラーがある |
+| -41000 | UnauthorizedAppKey | 承認されていないAppkey |
+| -42000 | NotExistServiceID | 登録されていないサービスID |
+| -42020 | CannotDeletedOnIndexRunning | インデックス中は削除できません。 |
+| -50000 | InternalServerError | サーバーエラー |
 
-### 서비스 아이디 목록
+### サービスIDリスト
 
-* 등록된 서비스 아이디 목록을 확인할 수 있는 API
+* 登録されたサービスIDリストを確認することができるAPI
 
-#### 요청
+#### リクエスト
 
 [URI]
 
-| 메서드 | URI |
+| メソッド | URI |
 | --- | --- |
 | GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/services |
 
 [Path Variable]
 
-| 이름 | 설명 |
+| 名前 | 説明 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 統合AppkeyまたはサービスAppkey |
 
-<details><summary>요청 예</summary>
+<details><summary>リクエスト例</summary>
 
 ```
 curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
@@ -212,19 +211,19 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 
 </details>
 
-#### 응답
+#### レスポンス
 
-* [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+* [レスポンス本文ヘッダ説明省略]
+    * [レスポンス共通情報](./service-api-guide/#common-response)で確認可能
 
-[응답 본문 데이터]
+[レスポンス本文データ]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 5 | 총 검색 결과 개수 |
-| data.items[].serviceID | String | O | my-service | 서비스 아이디 |
+| data.totalCount | Number | O | 5 | 検索結果の総数 |
+| data.items[].serviceID | String | O | my-service | サービスID |
 
-<details><summary>응답 본문 예</summary>
+<details><summary>レスポンス本文例</summary>
 
 ``` json
 {
@@ -248,43 +247,43 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 
 </details>
 
-#### 오류 코드
+#### エラーコード
 
-| resultCode | resultMessage | 설명 |
+| resultCode | resultMessage | 説明 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -50000 | InternalServerError | 서버 오류 |
+| -40000 | InvalidParam | パラメータにエラーがある |
+| -41000 | UnauthorizedAppKey | 承認されていないAppkey |
+| -50000 | InternalServerError | サーバーエラー |
 
 ### Search By ProductID
 
-* 상품 아이디를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
+* 商品IDを基に類似したファッションアイテムを含む商品を探すAPI
 
-#### 요청
+#### リクエスト
 
 [URI]
 
-| 메서드 | URI |
+| メソッド | URI |
 | --- | --- |
 | GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID} |
 
 [Path Variable]
 
-| 이름 | 설명 |
+| 名前 | 説明 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
-| serviceID | 서비스 아이디 |
-| productID | 상품 아이디 |
+| appKey | 統合AppkeyまたはサービスAppkey |
+| serviceID | サービスID |
+| productID | 商品ID |
 
 [URL Parameter]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| limit | int | O | 100 | 최대 크기<br>1 이상 200 이하로 설정 가능 |
+| limit | int | O | 100 | 最大サイズ<br>1以上200以下で設定可能 |
 
 
 
-<details><summary>요청 예</summary>
+<details><summary>リクエスト例</summary>
 
 ```
 curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID}?limit=100"
@@ -292,21 +291,21 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 응답
+#### レスポンス
 
-* [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+* [レスポンス本文ヘッダ説明省略]
+    * [レスポンス共通情報](./service-api-guide/#common-response)で確認可能
 
-[응답 본문 데이터]
+[レスポンス本文データ]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 100 | 총 검색 결과 개수 |
-| data.query | String | O | productID=10234455&limit=100 | 검색 질의 |
-| data.items[].similarity | Number | O | 0.91234 | 검색 적합도 점수 |
-| data.items[].productID | String | O | 8980335 | 상품 아이디 |
+| data.totalCount | Number | O | 100 | 検索結果の総数 |
+| data.query | String | O | productID=10234455&limit=100 | 検索クエリ |
+| data.items[].similarity | Number | O | 0.91234 | 検索適合度スコア |
+| data.items[].productID | String | O | 8980335 | 商品ID |
 
-<details><summary>응답 본문 예</summary>
+<details><summary>レスポンス本文例</summary>
 
 ``` json
 {
@@ -333,42 +332,42 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 오류 코드
+#### エラーコード
 
-| resultCode | resultMessage | 설명 |
+| resultCode | resultMessage | 説明 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -40050 | NotFoundProductIDError | 상품 아이디가 없음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
-| -50000 | InternalServerError | 서버 오류 |
+| -40000 | InvalidParam | パラメータにエラーがある |
+| -40050 | NotFoundProductIDError | 商品IDがない |
+| -41000 | UnauthorizedAppKey | 承認されていないAppkey |
+| -42000 | NotExistServiceID | 登録されていないサービスID |
+| -50000 | InternalServerError | サーバーエラー |
 
 ### Detect
 
-* 입력 이미지에서 패션 아이템을 감지하는 API입니다.
+* 入力画像からファッションアイテムを検出するAPIです。
 
-#### 요청
+#### リクエスト
 
 [URI]
 
-| 메서드 | URI |
+| メソッド | URI |
 | --- | --- |
 | GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/detect |
 
 [Path Variable]
 
-| 이름 | 설명 |
+| 名前 | 説明 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
-| serviceID | 서비스 아이디 |
+| appKey | 統合AppkeyまたはサービスAppkey |
+| serviceID | サービスID |
 
 [URL Parameter]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| path | String | O | `https://imagecdn.co.kr/sample_image.jpg` | URL Encoding된 이미지의 URL |
+| path | String | O | `https://imagecdn.co.kr/sample_image.jpg` | URL Encodingされた画像のurl |
 
-<details><summary>요청 예</summary>
+<details><summary>リクエスト例</summary>
 
 ```
 curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/detect?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg"
@@ -376,24 +375,24 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 응답
+#### レスポンス
 
-* [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+* [レスポンス本文ヘッダ説明省略]
+    * [レスポンス共通情報](./service-api-guide/#common-response)で確認可能
 
-[응답 본문 데이터]
+[レスポンス本文データ]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 100 | 총 검색 결과 개수 |
-| data.query | String | O | `path=https://imagecdn.co.kr/sample_image.jpg` | 검색 질의 |
-| data.items[].link | String | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | search by image에서 사용할 링크 |
-| data.items[].center | float64 array | O | [0.825047801147227, 0.330948979591837] | 감지된 아이템의 중앙 x, y 좌표 % |
-| data.items[].b0 | float64 array | O | [0.676864247418738, 0.219377551020408] | 감지된 아이템의 x0, y0 좌표 % |
-| data.items[].b1 | float64 array | O | [0.973231355525813, 0.4426204081632654] | 감지된 아이템의 x1, y1 좌표 % |
-| data.items[].score | float32 | O | 0.9732 | 감지된 아이템의 신뢰도 |
+| data.totalCount | Number | O | 100 | 検索結果の総数 |
+| data.query | String | O | `path=https://imagecdn.co.kr/sample_image.jpg` | 検索クエリ |
+| data.items[].link | String | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | search by imageで使用するリンク |
+| data.items[].center | float64 array | O | [0.825047801147227, 0.330948979591837] | 検出されたアイテムの中央x、y座標% |
+| data.items[].b0 | float64 array | O | [0.676864247418738, 0.219377551020408] | 検出されたアイテムのx0、y0座標% |
+| data.items[].b1 | float64 array | O | [0.973231355525813, 0.4426204081632654] | 検出されたアイテムのx1、y1座標% |
+| data.items[].score | float32 | O | 0.9732 | 検出されたアイテムの信頼度 |
 
-<details><summary>응답 본문 예</summary>
+<details><summary>レスポンス本文例</summary>
 
 ``` json
 {
@@ -428,54 +427,54 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 오류 코드
+#### エラーコード
 
-| resultCode | resultMessage | 설명 |
+| resultCode | resultMessage | 説明 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
-| -45020 | ImageTooLargeException | 이미지 파일의 크기가 너무 큼<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
-| -45040 | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
-| -45050 | InvalidImageURLException | 접근할 수 없는 URL |
-| -45060 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
-| -50000 | InternalServerError | 서버 오류 |
+| -40000 | InvalidParam | パラメータにエラーがある |
+| -41000 | UnauthorizedAppKey | 承認されていないAppkey |
+| -42000 | NotExistServiceID | 登録されていないサービスID |
+| -45020 | ImageTooLargeException | 画像ファイルが大きすぎる<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
+| -45040 | InvalidImageFormatException | サポートしていない画像形式<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
+| -45050 | InvalidImageURLException | アクセスできないURL |
+| -45060 | ImageTimeoutError | 画像ダウンロード時間超過 |
+| -50000 | InternalServerError | サーバーエラー |
 
-##### 응답 코드
+##### レスポンスコード
 
-* 항상 200
+* 常に200
 
-| 상태 | 설명 |
+| 状態 | 説明 |
 | --- | --- |
 | 200 | OK |
 
 ### Search By Image
 
-* detect api에서 응답으로 받은 link를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
+* detect apiから返されたlinkを基に類似したファッションアイテムを含む商品を探すAPI
 
-#### 요청
+#### リクエスト
 
 [URI]
 
-| 메서드 | URI |
+| メソッド | URI |
 | --- | --- |
 | GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/image |
 
 [Path Variable]
 
-| 이름 | 설명 |
+| 名前 | 説明 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
-| serviceID | 서비스 아이디 |
+| appKey | 統合AppkeyまたはサービスAppkey |
+| serviceID | サービスID |
 
 [URL Parameter]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| limit | int | O | 100 | 최대 크기<br>1 이상 200 이하로 설정 가능 |
-| link | string | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | detect API에서 전달받은 link |
+| limit | int | O | 100 | 最大サイズ<br>1以上200以下で設定可能 |
+| link | string | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | detect APIから伝達されたlink |
 
-<details><summary>요청 예</summary>
+<details><summary>リクエスト例</summary>
 
 ```
 curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/image?limit=100&amp;link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9u1XdzLmNvbS9mZy1pbWFnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUi0iJBTEwiLpbnB1dHMiOlt7ImJveCI6eyJsZWZ0IjozNQaInRvcCI6MyLCJ3aWR0aCI6MTU1LCJoZWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0=="
@@ -483,21 +482,21 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 응답
+#### レスポンス
 
-* [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+* [レスポンス本文ヘッダ説明省略]
+    * [レスポンス共通情報](./service-api-guide/#common-response)で確認可能
 
-[응답 본문 데이터]
+[レスポンス本文データ]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 100 | 총 검색 결과 개수 |
-| data.query | String | O | link=eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0=&limit=100 | 검색 질의 |
-| data.items[].similarity | Number | O | 0.91234 | 검색 적합도 점수 |
-| data.items[].productID | String | O | 8980335 | 상품 아이디 |
+| data.totalCount | Number | O | 100 | 検索結果の総数 |
+| data.query | String | O | link=eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0=&limit=100 | 検索クエリ |
+| data.items[].similarity | Number | O | 0.91234 | 検索適合度スコア |
+| data.items[].productID | String | O | 8980335 | 商品ID |
 
-<details><summary>응답 본문 예</summary>
+<details><summary>レスポンス本文例</summary>
 
 ``` json
 {
@@ -524,16 +523,15 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 오류 코드
+##### レスポンスコード
 
-| resultCode | resultMessage | 설명 |
+| resultCode | resultMessage | 説明 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
-| -45020 | ImageTooLargeException | 이미지 파일의 크기가 너무 큼<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
-| -45040 | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
-| -45050 | InvalidImageURLException | 접근할 수 없는 URL |
-| -45060 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
-| -50000 | InternalServerError | 서버 오류 |
-
+| -40000 | InvalidParam | パラメータにエラーがある |
+| -41000 | UnauthorizedAppKey | 承認されていないAppkey |
+| -42000 | NotExistServiceID | 登録されていないサービスID |
+| -45020 | ImageTooLargeException | 画像ファイルが大きすぎる<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
+| -45040 | InvalidImageFormatException | サポートしていない画像形式<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
+| -45050 | InvalidImageURLException | アクセスできないURL |
+| -45060 | ImageTimeoutError | 画像ダウンロード時間超過 |
+| -50000 | InternalServerError | サーバーエラー |

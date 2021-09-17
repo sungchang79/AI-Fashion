@@ -1,32 +1,36 @@
-## AI Service > AI Fashion > 콘솔 사용 가이드
+## AI Service > AI Fashion > Console User Guide
 
-콘솔에서는 서비스를 생성하거나 삭제할 수 있으며,  색인 현황 및 검색 통계 모니터링을 위한 대시보드를 제공합니다.<br>
-AI Fashion의 카메라 검색, 유사 이미지 상품 추천 기능은 API로 제공되며, [서비스 API 가이드](./service-api-guide)를 참고하여 구현할 수 있습니다.
+The console provides a dashboard where you can create or delete services and monitor indexing status and search statistics.
+AI Fashion's camera search and similar item recommendations features are provided as APIs, and the detailed features can be implemented by referring to the [Service API Guide](./service-api-guide).
 
-콘솔의 이용 방법은 다음과 같습니다.
+The following describes how to use the console.
 
-## 서비스 목록
+## Service List
 
-### 서비스 생성
-1. **서비스 생성**을 클릭합니다.
-2. 서비스명을 입력합니다.
-   - 서비스명에는 영어 소문자, 숫자, _(밑줄), -(하이픈)만 사용할 수 있습니다.
-   - 숫자, _(밑줄), -(하이픈)으로 시작할 수 없습니다.
-   - 2자 이상, 32자 이하로만 입력할 수 있습니다.
-3. **저장**을 클릭합니다.
+### Create Services
+![create](http://static.toastoven.net/prod_ai_fashion/create_service_en.png)
+1. Click **Create Service**.
+2. Enter the service name.
+    - Only lowercase letters, numbers, _ (underscore) and - (hyphen) are allowed in a service name.
+    - It cannot start with a number, _ (underscore), or - (hyphen).
+    - You can only enter 2 to 32 characters.
+3. Click **Save**.
 
-### 서비스 삭제
-1. 서비스 목록에서 삭제할 서비스의 **삭제** 버튼을 클릭합니다.
-   - 색인이 진행 중인 서비스는 삭제할 수 없습니다.
-2. **삭제** 대화 상자가 나타나면 **확인** 버튼을 클릭합니다.
+### Delete Services
+![delete](http://static.toastoven.net/prod_ai_fashion/delete_service_en.png)
+1. From the service list, click the **Delete** button of the service to delete.
+    - Services that are being indexed cannot be deleted.
+2. When the **Delete** dialog box appears, click the **Confirm** button.
 
-## 색인 현황 및 검색 통계 확인
+## Checking Indexing Status and Search Statistics
 
-### 색인 현황
-서비스 목록에서 선택한 서비스의 색인 현황을 확인할 수 있습니다.
-- 최근 로그순으로 30개까지 표시됩니다.
+### Indexing Status
+You can check the indexing status of the service selected in the service list.
+![indexStatus](http://static.toastoven.net/prod_ai_fashion/index_status_en.png)
+- Up to 30 items are displayed in the order of the most recent logs.
 
-### 검색 통계
-**검색 통계** 탭을 클릭하면 카메라 검색과 유사 이미지 상품 추천의 QC(Query Count, API를 호출한 횟수)를 차트로 확인할 수 있습니다.
-- 전날부터 최근 3개월간의 검색 QC를 확인할 수 있습니다.
-- .xls, .csv, .png, .jpeg 형식으로 파일을 다운로드할 수 있습니다.
+### Search Statistics
+If you click the **Search Statistics** tab, you can view the query count (QC, the number of API calls) of Camera Search and Similar Item Recommendations in charts.
+![searchStats](http://static.toastoven.net/prod_ai_fashion/search_stats_en.png)
+- You can view the search QC during the last 3 months starting from the previous day.
+- You can download a file in .xls, .csv, .png, and .jpeg format.
