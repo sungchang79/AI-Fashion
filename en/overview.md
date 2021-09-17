@@ -2,7 +2,6 @@
 
 AI Fashion provides services specialized for the fashion field by learning from product data in various categories.
 It lets users quickly and easily search for similar products with just an image without knowing the product name or properties.
-
 You can implement an optimal business model by presenting similar products in various price ranges or recommending similar products when the desired product is out of stock.
 
 ## Main Features

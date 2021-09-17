@@ -308,7 +308,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 | order | string | X | "reservedTime:desc" | (기본값)등록 시간 내림 차순<br/>조건 1개만 설정 가능<br/>설정 가능 조건은 ['정렬'](#indexes-status-order) 참조 |
 | status | string | X | "finished" | 색인의 상탯값 |
 
-#### paging
+#### Paging
 * start와 limit 파라미터로 페이징이 가능합니다.
     * start: 0부터 시작합니다.
     * limit: 0보다 커야 하며 최대 100까지 가능합니다.

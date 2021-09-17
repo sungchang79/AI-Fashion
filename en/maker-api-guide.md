@@ -184,14 +184,15 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 #### Error Codes
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
-| -40000| InvalidParam | There is an error in the parameter. |
-| -40010| InvalidFileError | There is an error in the file transfer. |
-| -40020| NoDataError | The provided file is empty. |
-| -40030| ExceedDataSizeError | The provided file exceeds the file size limit or data count limit. |
-| -40040| IndexQuotaExceededException | Daily quota for request has been exceeded. |
-| -40080| TooManyRequestError | Multiple requests occurred simultaneously. |
-| -41000| UnauthorizedAppKey | Unauthorized Appkey. |
-| -50000| InternalServerError | Server error. |
+| -40000 | InvalidParam | There is an error in the parameter. |
+| -40010 | InvalidFileError | There is an error in the file transfer. |
+| -40020 | NoDataError | The provided file is empty. |
+| -40030 | ExceedDataSizeError | The provided file exceeds the file size limit or data count limit. |
+| -40040 | IndexQuotaExceededException | Daily quota for request has been exceeded. |
+| -40080 | TooManyRequestError | Multiple requests occurred simultaneously. |
+| -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
+| -42000 | NotExistServiceID | Unregistered service ID. |
+| -50000 | InternalServerError | Server error. |
 
 ### Service Information
 * Check the current information of services.
@@ -305,7 +306,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 | order | string | X | "reservedTime:desc" | (Default ) In descending order of the registration time<br/>Only one condition can be set<br/>For conditions that can set, see ['Sorting'](#indexes-status-order) |
 | status | string | X | "finished" | Status value of indexing |
 
-#### paging
+#### Paging
 * Paging can be performed with start and limit parameters.
     * start: Starts from 0.
     * limit: Must be higher than 0 and the maximum value is 100.
@@ -411,6 +412,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
-| -40000| InvalidParam | There is an error in the parameter. |
-| -41000| UnauthorizedAppKey | Unauthorized Appkey. |
-| -50000| InternalServerError | Server error. |
+| -40000 | InvalidParam | There is an error in the parameter. |
+| -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
+| -42000 | NotExistServiceID | Unregistered service ID. |
+| -50000 | InternalServerError | Server error. |

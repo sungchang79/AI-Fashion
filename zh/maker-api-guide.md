@@ -305,7 +305,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 | order | string | X | "reservedTime:desc" | (Default ) In descending order of the registration time<br/>Only one condition can be set<br/>For conditions that can set, see ['Sorting'](#indexes-status-order) |
 | status | string | X | "finished" | Status value of indexing |
 
-#### paging
+#### Paging
 * Paging can be performed with start and limit parameters.
     * start: Starts from 0.
     * limit: Must be higher than 0 and the maximum value is 100.

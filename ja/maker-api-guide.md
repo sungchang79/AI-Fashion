@@ -12,6 +12,7 @@
 ### インデックス入力ファイル情報
 * utf-8でエンコードされたjsonl、csvファイル形式をサポートします。
     * .csvファイルを作成する時は、最初の行から実際のデータで埋める必要があります。
+    * ファイルに空白の行があってはいけません。
 * ファイルサイズは最大20MBまで可能で、最大許可文書数は10,000個です。
 * 1日最大4回までアップロードが可能で、毎日日本時間0時に初期化されます。
 * Service IDごとにインデックス可能な最大文書数は100,000個です。
@@ -184,14 +185,16 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 #### エラーコード
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
-| -40000| InvalidParam | パラメータにエラーがある |
-| -40010| InvalidFileError | ファイル伝達にエラーがある場合 |
-| -40020| NoDataError | 伝達されたファイルが空のファイルの場合 |
-| -40030| ExceedDataSizeError | 伝達されたファイルが規定の容量または規定のデータ数を超過した場合 |
-| -40040| IndexQuotaExceededException | 1日のリクエスト回数を超過した場合 |
-| -40080| TooManyRequestError | 同時に複数回リクエストした場合 |
-| -41000| UnauthorizedAppKey | 承認されていないAppkey |
-| -50000| InternalServerError | サーバーエラー |
+| -40000 | InvalidParam | パラメータにエラーがある |
+| -40010 | InvalidFileError | ファイル伝達にエラーがある場合 |
+| -40020 | NoDataError | 伝達されたファイルが空のファイルの場合 |
+| -40030 | ExceedDataSizeError | 伝達されたファイルが規定の容量または規定のデータ数を超過した場合 |
+| -40040 | IndexQuotaExceededException | 1日のリクエスト回数を超過した場合 |
+| -40080 | TooManyRequestError | 同時に複数回リクエストした場合 |
+| -40400 | NoApiFound | 定義されていないapiでリクエストした場合 |
+| -41000 | UnauthorizedAppKey | 承認されていないAppkey |
+| -42000 | NotExistServiceID | 登録されていないサービスID |
+| -50000 | InternalServerError | サーバーエラー |
 
 ### サービス情報
 * サービスの現在情報を確認します。 
@@ -273,9 +276,9 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
-| -40000| InvalidParam | パラメータにエラーがある |
-| -41000| UnauthorizedAppKey | 承認されていないAppkey |
-| -50000| InternalServerError | サーバーエラー |
+| -40000 | InvalidParam | パラメータにエラーがある |
+| -41000 | UnauthorizedAppKey | 承認されていないAppkey |
+| -50000 | InternalServerError | サーバーエラー |
 
 ### インデックス状態照会
 * リクエストされたインデックスの現現在状態を確認します。 
@@ -305,7 +308,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 | order | string | X | "reservedTime:desc" | (デフォルト値)登録時間降順<br/>1つの条件のみ設定可能<br/>設定可能な条件は[ソート](#indexes-status-order)を参照 |
 | status | string | X | "finished" | インデックスの状態値 |
 
-#### paging
+#### Paging
 * startとlimitパラメータでページングが可能です。
     * start：0から始まります。
     * limit：0より大きくなければならず、最大100まで可能です。
@@ -411,6 +414,8 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
-| -40000| InvalidParam | パラメータにエラーがある |
-| -41000| UnauthorizedAppKey | 承認されていないAppkey |
-| -50000| InternalServerError | サーバーエラー |
+| -40000 | InvalidParam | パラメータにエラーがある |
+| -40400 | NoApiFound | 定義されていないapiでリクエストした場合 |
+| -41000 | UnauthorizedAppKey | 承認されていないAppkey |
+| -42000 | NotExistServiceID | 登録されていないサービスID |
+| -50000 | InternalServerError | サーバーエラー |
