@@ -1,7 +1,7 @@
 
 ## AI Service > AI Fashion > 検索APIガイド
 
-* AI Fashion検索サービスを使用するために必要なAPIを説明します。
+- AI Fashion検索サービスを使用するために必要なAPIを説明します。
 
 ## API共通情報
 ### 事前準備
@@ -22,10 +22,10 @@
 <span id="input-image-guide"></span>
 ### 入力画像ガイド
 
-* 入力画像をダウンロードするのに3秒以上かかる場合は失敗とみなします。
-* 入力画像のファッションアイテムの幅と高さが両方20px以下の場合は認識しません。
-* 画像サイズの大きさに比例してファッションアイテムのサイズも大きくすると正確に認識が可能です。
-* 画像内でファッションアイテムが占める割合が大きいほど正確に認識が可能です。
+* 入力画像のダウンロードに3秒以上かかる場合は失敗とみなします。
+* 入力イ画像ファッションアイテムの幅と高さがどちらも20px以下の場合は認識しません。
+* 画像サイズの大きさに比例してファッションアイテムのサイズも大きくすると正確に認識できます。
+* 画像内でファッションアイテムが占める割合が大きいほど正確に認識できます。
 * 画像最大サイズ：最大5,000,000 bytes
 * サポート画像フォーマット：PNG、JPEG、GIF
 
@@ -71,7 +71,7 @@
 ### サービスID登録
 
 * サービスIDを登録することができるAPI
-* 最大5個まで登録が可能。
+* 最大5個まで登録可能
 * 許可文字
     * 英字小文字、数字、(-)、(_)許可
     * 2～32文字まで許可
@@ -119,7 +119,7 @@ curl -X POST "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}
 
 </details>
 
-#### Error Codes
+#### エラーコード
 
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
@@ -132,7 +132,7 @@ curl -X POST "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}
 ### サービスID削除
 
 * 登録されたサービスIDを削除することができるAPI
-* 登録されたサービスIDでインデックスリクエストがインデックス進行中にはサービスIDを削除できません。
+* サービスIDに処理中のインデックスリクエストがある場合は、サービスIDを削除できません。
 
 #### リクエスト
 
@@ -176,13 +176,13 @@ curl -X DELETE "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceI
 
 </details>
 
-#### Error Codes
+#### エラーコード
 
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
 | -40000 | InvalidParam | パラメータにエラーがある |
 | -41000 | UnauthorizedAppKey | 承認されていないAppkey |
-| -42000 | NotExistServiceID | 登録できないサービスID |
+| -42000 | NotExistServiceID | 登録されていないサービスID |
 | -42020 | CannotDeletedOnIndexRunning | インデックス中は削除できません。 |
 | -50000 | InternalServerError | サーバーエラー |
 
@@ -221,7 +221,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 5 | 検索結果の総数を出力します。 |
+| data.totalCount | Number | O | 5 | 検索結果の総数 |
 | data.items[].serviceID | String | O | my-service | サービスID |
 
 <details><summary>レスポンス本文例</summary>
@@ -248,7 +248,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 
 </details>
 
-#### Error Codes
+#### エラーコード
 
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
@@ -280,7 +280,9 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| limit | int | O | 100 | 最大サイズ<br>0 < limit <= 200 |
+| limit | int | O | 100 | 最大サイズ<br>1以上200以下で設定可能 |
+
+
 
 <details><summary>リクエスト例</summary>
 
@@ -299,9 +301,9 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 100 | 検索結果の総数を出力します。 |
-| data.query | String | O | productID=10234455&limit=100 | 検索クエリを出力します。 |
-| data.items[].similarity | Number | O | 0.91234 | 検索適合度スコアを出力します。 |
+| data.totalCount | Number | O | 100 | 検索結果の総数 |
+| data.query | String | O | productID=10234455&limit=100 | 検索クエリ |
+| data.items[].similarity | Number | O | 0.91234 | 検索適合度スコア |
 | data.items[].productID | String | O | 8980335 | 商品ID |
 
 <details><summary>レスポンス本文例</summary>
@@ -331,17 +333,17 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### Error Codes
+#### エラーコード
 
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
 | -40000 | InvalidParam | パラメータにエラーがある |
-| -40050 | NotFoundProductIDError | 商品IDがありません |
+| -40050 | NotFoundProductIDError | 商品IDがない |
 | -41000 | UnauthorizedAppKey | 承認されていないAppkey |
-| -42000 | NotExistServiceID | 登録できないサービスID |
+| -42000 | NotExistServiceID | 登録されていないサービスID |
 | -50000 | InternalServerError | サーバーエラー |
 
-### detect
+### Detect
 
 * 入力画像からファッションアイテムを検出するAPIです。
 
@@ -364,7 +366,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| path | String | O | `https://imagecdn.co.kr/sample_image.jpg` | URL Encodeされたimage url |
+| path | String | O | `https://imagecdn.co.kr/sample_image.jpg` | URL Encodingされた画像のurl |
 
 <details><summary>リクエスト例</summary>
 
@@ -383,13 +385,13 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 100 | 検索結果の総数を出力します。 |
-| data.query | String | O | `path=https://imagecdn.co.kr/sample_image.jpg` | 検索クエリを出力します。 |
+| data.totalCount | Number | O | 100 | 検索結果の総数 |
+| data.query | String | O | `path=https://imagecdn.co.kr/sample_image.jpg` | 検索クエリ |
 | data.items[].link | String | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | search by imageで使用するリンク |
-| data.items[].center | float64 array | O | [0.825047801147227, 0.330948979591837] | detectされたアイテムの中央x、y座標% |
-| data.items[].b0 | float64 array | O | [0.676864247418738, 0.219377551020408] | detectされたアイテムのx0、y0座標% |
-| data.items[].b1 | float64 array | O | [0.973231355525813, 0.4426204081632654] | detectされたアイテムのx1、y1座標% |
-| data.items[].score | float32 | O | 0.9732 | detectされたアイテムの信頼度 |
+| data.items[].center | float64 array | O | [0.825047801147227, 0.330948979591837] | 検出されたアイテムの中央x、y座標% |
+| data.items[].b0 | float64 array | O | [0.676864247418738, 0.219377551020408] | 検出されたアイテムのx0、y0座標% |
+| data.items[].b1 | float64 array | O | [0.973231355525813, 0.4426204081632654] | 検出されたアイテムのx1、y1座標% |
+| data.items[].score | float32 | O | 0.9732 | 検出されたアイテムの信頼度 |
 
 <details><summary>レスポンス本文例</summary>
 
@@ -426,28 +428,28 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### Error Codes
+#### エラーコード
 
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
 | -40000 | InvalidParam | パラメータにエラーがある |
 | -41000 | UnauthorizedAppKey | 承認されていないAppkey |
-| -42000 | NotExistServiceID | 登録できないサービスID |
+| -42000 | NotExistServiceID | 登録されていないサービスID |
 | -45020 | ImageTooLargeException | 画像ファイルが大きすぎる<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
-| -45040 | InvalidImageFormatException | 画像ファイルがサポートしていない形式<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
+| -45040 | InvalidImageFormatException | サポートしていない画像形式<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
 | -45050 | InvalidImageURLException | アクセスできないURL |
 | -45060 | ImageTimeoutError | 画像ダウンロード時間超過 |
 | -50000 | InternalServerError | サーバーエラー |
 
-##### Response Code
+##### レスポンスコード
 
 * 常に200
 
-| Status | Description |
+| 状態 | 説明 |
 | --- | --- |
 | 200 | OK |
 
-### search by image
+### Search By Image
 
 * detect apiから返されたlinkを基に類似したファッションアイテムを含む商品を探すAPI
 
@@ -470,7 +472,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| limit | int | O | 100 | 最大サイズ<br>0 < limit <= 200 |
+| limit | int | O | 100 | 最大サイズ<br>1以上200以下で設定可能 |
 | link | string | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | detect APIから伝達されたlink |
 
 <details><summary>リクエスト例</summary>
@@ -490,9 +492,9 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 100 | 検索結果の総数を出力します。 |
-| data.query | String | O | link=eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0=&limit=100 | 検索クエリを出力します。 |
-| data.items[].similarity | Number | O | 0.91234 | 検索適合度スコアを出力します。 |
+| data.totalCount | Number | O | 100 | 検索結果の総数 |
+| data.query | String | O | link=eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0=&limit=100 | 検索クエリ |
+| data.items[].similarity | Number | O | 0.91234 | 検索適合度スコア |
 | data.items[].productID | String | O | 8980335 | 商品ID |
 
 <details><summary>レスポンス本文例</summary>
@@ -522,15 +524,15 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### Error Codes
+##### レスポンスコード
 
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
 | -40000 | InvalidParam | パラメータにエラーがある |
 | -41000 | UnauthorizedAppKey | 承認されていないAppkey |
-| -42000 | NotExistServiceID | 登録できないサービスID |
+| -42000 | NotExistServiceID | 登録されていないサービスID |
 | -45020 | ImageTooLargeException | 画像ファイルが大きすぎる<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
-| -45040 | InvalidImageFormatException | 画像ファイルがサポートしていない形式<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
+| -45040 | InvalidImageFormatException | サポートしていない画像形式<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
 | -45050 | InvalidImageURLException | アクセスできないURL |
 | -45060 | ImageTimeoutError | 画像ダウンロード時間超過 |
 | -50000 | InternalServerError | サーバーエラー |
