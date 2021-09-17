@@ -1,9 +1,9 @@
-## AI Service > AI Fashion > Maker APIガイド 
+## AI Service > AI Fashion > Maker APIガイド
 
 * AI Fashion Makerサービスを使用するために必要なAPIを説明します。
 
-## API共通情報 
-### 事前準備 
+## API共通情報
+### 事前準備
 * APIを使用するにはプロジェクト統合AppkeyまたはサービスAppkeyが必要です。
     * プロジェクト統合Appkeyを使用することを推奨します。
     * プロジェクト統合Appkeyは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
@@ -42,11 +42,11 @@
 
 ```json
 {
-	"header": {
-		"isSuccessful": true,
-		"resultCode": 0,
-		"resultMessage": "SUCCESS"
-	}
+        "header": {
+                "isSuccessful": true,
+                "resultCode": 0,
+                "resultMessage": "SUCCESS"
+        }
 }
 ```
 
@@ -54,11 +54,11 @@
 
 ```json
 {
-	"header": {
-		"isSuccessful": false,
-		"resultCode": -40000,
-		"resultMessage": "InvalidParam"
-	}
+        "header": {
+                "isSuccessful": false,
+                "resultCode": -40000,
+                "resultMessage": "InvalidParam"
+        }
 }
 ```
 
@@ -197,7 +197,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -50000 | InternalServerError | サーバーエラー |
 
 ### サービス情報
-* サービスの現在情報を確認します。 
+* サービスの現在情報を確認します。
     * サービス別の残りインデックス回数
     * サービス別のインデックスされた文書数
 
@@ -281,7 +281,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 | -50000 | InternalServerError | サーバーエラー |
 
 ### インデックス状態照会
-* リクエストされたインデックスの現現在状態を確認します。 
+* リクエストされたインデックスの現現在状態を確認します。
 * インデックス状態の最大保管期間は登録時間基準6か月です。
 
 #### リクエスト
@@ -324,7 +324,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 <span id="indexes-status-order"></span>
 #### ソート
 * レスポンス文書のソートパラメータ
-* パラメータ形式。 
+* パラメータ形式。
     * {ソート可能項目}：{ソート方式}
 * ソート可能項目
     * reservedTime：インデックスリクエスト登録時間
@@ -396,13 +396,13 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
             "filename": "202106251000_product.jsonl",
             "status": "reserved",
             "reservedTime": 1627018935,
-            "startTime": 1627018935,            
+            "startTime": 1627018935,
             "finishTime": 1627018935,
             "addCnt": 234,
             "failCnt": 31,
-            "deleteCnt": 31,        
+            "deleteCnt": 31,
             "updateCnt": 592,
-            "totalCnt": 888      
+            "totalCnt": 888
         }]
     }
 }

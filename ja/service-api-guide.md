@@ -1,11 +1,10 @@
-
 ## AI Service > AI Fashion > 検索APIガイド
 
 - AI Fashion検索サービスを使用するために必要なAPIを説明します。
 
 ## API共通情報
 ### 事前準備
-- APIを使用するにはプロジェクト統合AppkeyまたはサービスAppkeyが必要です。 
+- APIを使用するにはプロジェクト統合AppkeyまたはサービスAppkeyが必要です。
     - プロジェクト統合Appkeyを使用することを推奨します。
     - プロジェクト統合Appkeyはプロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
     * サービスAppkeyはコンソール上部の**URL & Appkey**メニューで確認が可能です。
@@ -46,11 +45,11 @@
 
 ```json
 {
-	"header": {
-		"isSuccessful": true,
-		"resultCode": 0,
-		"resultMessage": "SUCCESS"
-	}
+        "header": {
+                "isSuccessful": true,
+                "resultCode": 0,
+                "resultMessage": "SUCCESS"
+        }
 }
 ```
 
@@ -58,11 +57,11 @@
 
 ```json
 {
-	"header": {
-		"isSuccessful": false,
-		"resultCode": -40000,
-		"resultMessage": "InvalidParam"
-	}
+        "header": {
+                "isSuccessful": false,
+                "resultCode": -40000,
+                "resultMessage": "InvalidParam"
+        }
 }
 ```
 

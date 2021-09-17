@@ -1,4 +1,3 @@
-
 ## AI Service > AI Fashion > Search API Guide
 
 - This guide describes APIs required to use the AI Fashion Search service.
@@ -536,4 +535,3 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45050 | InvalidImageURLException | The URL is not accessible. |
 | -45060 | ImageTimeoutError | Image download timeout occurred. |
 | -50000 | InternalServerError | Server error. |
-

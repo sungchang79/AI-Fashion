@@ -1,9 +1,7 @@
-## AI Service > AI Fashion > Maker API 가이드 
-
 * AI Fashion Maker 서비스를 사용하는 데 필요한 API를 설명합니다.
 
-## API 공통 정보 
-### 사전 준비 
+## API 공통 정보
+### 사전 준비
 * API 사용을 위해서는 프로젝트 통합 Appkey 또는 서비스 Appkey가 필요합니다.
     * 프로젝트 통합 Appkey 사용을 권장합니다.
     * 프로젝트 통합 Appkey는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
@@ -42,11 +40,11 @@
 
 ```json
 {
-	"header": {
-		"isSuccessful": true,
-		"resultCode": 0,
-		"resultMessage": "SUCCESS"
-	}
+        "header": {
+                "isSuccessful": true,
+                "resultCode": 0,
+                "resultMessage": "SUCCESS"
+        }
 }
 ```
 
@@ -54,11 +52,11 @@
 
 ```json
 {
-	"header": {
-		"isSuccessful": false,
-		"resultCode": -40000,
-		"resultMessage": "InvalidParam"
-	}
+        "header": {
+                "isSuccessful": false,
+                "resultCode": -40000,
+                "resultMessage": "InvalidParam"
+        }
 }
 ```
 
@@ -197,7 +195,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -50000 | InternalServerError | 서버 오류 |
 
 ### 서비스 정보
-* 서비스들의 현재 정보를 확인합니다. 
+* 서비스들의 현재 정보를 확인합니다.
     * 서비스별로 남은 색인 횟수
     * 서비스별 색인된 문서 개수
 
@@ -282,7 +280,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 | -50000 | InternalServerError | 서버 오류 |
 
 ### 색인 상태 조회
-* 요청된 색인들의 현재 상태를 확인합니다. 
+* 요청된 색인들의 현재 상태를 확인합니다.
 * 색인 상태의 최대 보관 기간은 등록 시간 기준 6개월입니다.
 
 #### 요청
@@ -314,7 +312,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
     * start: 0부터 시작합니다.
     * limit: 0보다 커야 하며 최대 100까지 가능합니다.
 * 최대 페이징 가능한 숫자는 1000입니다.
-    * 가능: 
+    * 가능:
         * start: 900
         * end: 100
     * 불가능:
@@ -325,7 +323,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 <span id="indexes-status-order"></span>
 #### 정렬
 * 응답 문서의 정렬 파라미터
-* 파라미터 형식. 
+* 파라미터 형식.
     * {정렬 가능 항목}:{정렬 방식}
 * 정렬 가능 항목
     * reservedTime: 색인 요청 등록 시간
@@ -397,13 +395,13 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
             "filename": "202106251000_product.jsonl",
             "status": "reserved",
             "reservedTime": 1627018935,
-            "startTime": 1627018935,            
+            "startTime": 1627018935,
             "finishTime": 1627018935,
             "addCnt": 234,
             "failCnt": 31,
-            "deleteCnt": 31,        
+            "deleteCnt": 31,
             "updateCnt": 592,
-            "totalCnt": 888      
+            "totalCnt": 888
         }]
     }
 }
