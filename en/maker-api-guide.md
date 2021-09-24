@@ -12,6 +12,7 @@
 ### Indexing Input File Information
 * .jsonl and .csv file format encoded in utf-8 is supported.
     * For csv files, you need to fill in the actual data from the first line.
+    * There should be no blank lines in the file.
 * The maximum file size is 20MB, and the maximum number of documents allowed is 10,000.
 * You can upload files up to 4 times per day, and the counting is reset every day at 00:00 Korean time.
 * The maximum number of documents that can be indexed per Service ID is 100,000.
@@ -190,6 +191,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -40030 | ExceedDataSizeError | The provided file exceeds the file size limit or data count limit. |
 | -40040 | IndexQuotaExceededException | Daily quota for request has been exceeded. |
 | -40080 | TooManyRequestError | Multiple requests occurred simultaneously. |
+| -40400 | NoApiFound | A request was made with an undefined API. |
 | -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
 | -42000 | NotExistServiceID | Unregistered service ID. |
 | -50000 | InternalServerError | Server error. |
@@ -275,6 +277,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
 | -40000 | InvalidParam | There is an error in the parameter. |
+| -40400 | NoApiFound | A request was made with an undefined API. |
 | -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
 | -50000 | InternalServerError | Server error. |
 
@@ -303,7 +306,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 | --- | --- | --- | --- | --- |
 | start | int | O | 0 | Start index.<br/>Starts from 0. |
 | limit | int | O | 100 | Max 100.<br/>start:0, limit:100 indicates 1-100. <br/>start:200, limit:100 indicates 201-300. |
-| order | string | X | "reservedTime:desc" | (Default ) In descending order of the registration time<br/>Only one condition can be set<br/>For conditions that can set, see ['Sorting'](#indexes-status-order) |
+| order | string | X | "reservedTime:desc" | (Default) In descending order of the registration time<br/>Only one condition can be set<br/>For conditions that can set, see ['Sorting'](#indexes-status-order) |
 | status | string | X | "finished" | Status value of indexing |
 
 #### Paging
@@ -345,7 +348,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
     * finished: Finished (including partially failed)
 
 <details>
-<summary>Request Example </summary>
+<summary>Request Example</summary>
 
 ```
 curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=100&status=running&order=startTime:desc"  -H "Content-Type: application/json"
@@ -413,6 +416,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
 | -40000 | InvalidParam | There is an error in the parameter. |
+| -40400 | NoApiFound | A request was made with an undefined API. |
 | -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
 | -42000 | NotExistServiceID | Unregistered service ID. |
 | -50000 | InternalServerError | Server error. |
