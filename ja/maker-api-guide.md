@@ -277,6 +277,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
 | -40000 | InvalidParam | パラメータにエラーがある |
+| -40400 | NoApiFound | 定義されていないapiでリクエストした場合 |
 | -41000 | UnauthorizedAppKey | 承認されていないAppkey |
 | -50000 | InternalServerError | サーバーエラー |
 
