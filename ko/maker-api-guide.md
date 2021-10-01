@@ -341,7 +341,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
     * desc: 내림차순
 
 #### 색인 상태
-* 색인 상탯값을 조건으로 검색할 수 있습니다.
+* 색인 상태값을 조건으로 검색할 수 있습니다.
     * reserved : 대기
     * running : 진행 중
     * failed : 전체 실패
