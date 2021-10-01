@@ -1,4 +1,4 @@
-## AI Service > AI Fashion > サービスAPIガイド
+## AI Service > AI Fashion > Service APIガイド
 
 - AI Fashion検索サービスを使用するために必要なAPIを説明します。
 
