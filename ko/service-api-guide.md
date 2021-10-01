@@ -1,5 +1,5 @@
 
-## AI Service > AI Fashion > 검색 API 가이드
+## AI Service > AI Fashion > Service API 가이드
 
 - AI Fashion 검색 서비스를 사용하는 데 필요한 API를 설명합니다.
 

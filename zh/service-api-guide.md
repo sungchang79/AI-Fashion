@@ -1,4 +1,4 @@
-## AI Service > AI Fashion > Search API Guide
+## AI Service > AI Fashion > Service API Guide
 
 - This guide describes APIs required to use the AI Fashion Search service.
 

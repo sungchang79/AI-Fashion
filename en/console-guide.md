@@ -11,8 +11,8 @@ The following describes how to use the console.
 ![create](http://static.toastoven.net/prod_ai_fashion/create_service_en.png)
 1. Click **Create Service**.
 2. Enter the service name.
-    - Only lowercase letters, numbers, _ (underscore) and - (hyphen) are allowed in a service name.
-    - It cannot start with a number, _ (underscore), or - (hyphen).
+    - Only lowercase letters, numbers, \_(underscore) and -(hyphen) are allowed in a service name.
+    - It cannot start with a number, \_(underscore), or -(hyphen).
     - You can only enter 2 to 32 characters.
 3. Click **Save**.
 
