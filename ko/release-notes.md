@@ -1,4 +1,7 @@
 ## AI Service > AI Fashion > 릴리스 노트
 
+### 2021. 10. 26.
+* 딥 태깅 API(tag) 추가
+
 ### 2021. 09. 28.
 * AI Fashion 서비스 출시
