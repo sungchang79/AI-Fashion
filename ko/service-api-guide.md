@@ -66,7 +66,7 @@
 }
 ```
 
-## API 목차
+## 서비스 목록
 
 ### 서비스 아이디 등록
 
@@ -256,6 +256,8 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -50000 | InternalServerError | 서버 오류 |
 
+## 유사 이미지 상품 추천
+
 ### Search By ProductID
 
 * 상품 아이디를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
@@ -342,6 +344,8 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
 | -50000 | InternalServerError | 서버 오류 |
+
+## 카메라 검색
 
 ### Detect
 
@@ -528,6 +532,8 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45050 | InvalidImageURLException | 접근할 수 없는 URL |
 | -45060 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
 | -50000 | InternalServerError | 서버 오류 |
+
+## 딥태깅
 
 <span id="tag-api"></span>
 ### Tag
