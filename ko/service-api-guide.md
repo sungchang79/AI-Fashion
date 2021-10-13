@@ -582,12 +582,12 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | --- | --- | --- | --- | --- |
 | data.totalCount | Number | O | 2 | 총 검색 결과 개수 |
 | data.query | String | O | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&item_limit=3` | 검색 질의 |
-| data.items[].type | String | O | JACKET | 아이템의 type |
-| data.items[].score | float32 | O | 0.9515 | 아이템의 신뢰도 |
-| data.items[].tags | Array of json object | O |  | 아이템 태그 정보의 배열 |
+| data.items[].type | String | O | JACKET | 감지된 아이템의 type |
+| data.items[].score | float32 | O | 0.9515 | 감지된 아이템의 신뢰도 |
+| data.items[].tags | Array of json object | O |  | 감지된 아이템 태그 정보의 배열 |
 | data.items[].tags[].attribute | String | O | category | 태그의 속성  |
 | data.items[].tags[].labels | Array of json object | O |  | 태그 라벨의 배열 |
-| data.items[].tags[].labels[].label | String | O | 블라우스 \| Blouse | 태그 라벨. URL Parameter의 lang에 의해 응답 언어가 달라짐  |
+| data.items[].tags[].labels[].label | String | O | 블라우스 \| Blouse | 태그 라벨<br/>URL Parameter의 lang에 의해 응답 언어가 달라짐  |
 | data.items[].tags[].labels[].score | float32 | O | 0.9545 | 태그 라벨의 신뢰도 |
 | data.items[].center | float64 array | O | [0.825047801147227, 0.330948979591837] | 감지된 아이템의 중앙 x, y 좌표 % |
 | data.items[].b0 | float64 array | O | [0.676864247418738, 0.219377551020408] | 감지된 아이템의 x0, y0 좌표 % |
@@ -652,9 +652,9 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | --- | --- | --- |
 | -40000 | InvalidParam | 파라미터에 오류가 있음 |
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -42000 | NotExistServiceID | 등록 안 된 서비스 아이디 |
+| -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
 | -45020 | ImageTooLargeException | 이미지 파일의 크기가 너무 큼<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
-| -45040 | InvalidImageFormatException | 이미지 파일이 지원하지 않는 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45040 | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
 | -45050 | InvalidImageURLException | 접근할 수 없는 URL |
 | -45060 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
 | -50000 | InternalServerError | 서버 오류 |
