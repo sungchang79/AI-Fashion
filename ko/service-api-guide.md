@@ -26,7 +26,7 @@
 * 입력 이미지 패션 아이템의 너비와 높이가 모두 20px 이하인 경우에는 인식하지 않습니다.
 * 이미지 크기가 커질수록 패션 아이템의 크기도 커져야 더 정확하게 인식할 수 있습니다.
 * 이미지에서 패션 아이템이 차지하는 비중이 클수록 더 정확하게 인식할 수 있습니다.
-* 이미지 최대 크기: 최대 5,000,000 bytes
+* 이미지 파일의 최대 크기: 5,000,000 bytes (단, [tag API](#tag-api)는 1,000,000 bytes)
 * 지원 이미지 포맷: PNG, JPEG, GIF
 
 <span id="common-response"></span>
@@ -66,7 +66,7 @@
 }
 ```
 
-## API 목차
+## 서비스 관리
 
 ### 서비스 아이디 등록
 
@@ -256,6 +256,8 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -50000 | InternalServerError | 서버 오류 |
 
+## 유사 이미지 상품 추천
+
 ### Search By ProductID
 
 * 상품 아이디를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
@@ -342,6 +344,8 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
 | -50000 | InternalServerError | 서버 오류 |
+
+## 카메라 검색
 
 ### Detect
 
@@ -441,14 +445,6 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45060 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
 | -50000 | InternalServerError | 서버 오류 |
 
-##### 응답 코드
-
-* 항상 200
-
-| 상태 | 설명 |
-| --- | --- |
-| 200 | OK |
-
 ### Search By Image
 
 * detect api에서 응답으로 받은 link를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
@@ -516,6 +512,132 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
             {
                 "similarity": 0.81234,
                 "productID": "7980335"
+            }
+        ]
+    }
+}
+```
+
+</details>
+
+#### 오류 코드
+
+| resultCode | resultMessage | 설명 |
+| --- | --- | --- |
+| -40000 | InvalidParam | 파라미터에 오류가 있음 |
+| -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
+| -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
+| -45020 | ImageTooLargeException | 이미지 파일의 크기가 너무 큼<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45040 | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45050 | InvalidImageURLException | 접근할 수 없는 URL |
+| -45060 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
+| -50000 | InternalServerError | 서버 오류 |
+
+## 딥태깅
+
+<span id="tag-api"></span>
+### Tag
+
+* 입력 이미지에서 패션 아이템의 태그 정보를 감지하는 API입니다.
+
+#### 요청
+
+[URI]
+
+| 메서드 | URI |
+| --- | --- |
+| GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/tag |
+
+[Path Variable]
+
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
+| serviceID | 서비스 아이디 |
+
+[URL Parameter]
+
+| 이름 | 타입 | 필수 | 예제 | 설명 |
+| --- | --- | --- | --- | --- |
+| path | String | X | `https://imagecdn.co.kr/sample_image.jpg` | URL Encode된 이미지 URL |
+| lang | String | X | ko | label의 언어<br/>default : en<br/>en : English<br/>ko : Korean |
+| item_limit | int | X | 3 | 이미지에서 발견된 패션 아이템 중 태그 정보를 응답할 아이템 숫자<br/>아이템의 넓이가 넓은 순서로 정렬<br/>default : 1<br/>최대 크기<br>1 이상 4 이하로 설정 가능 |
+
+<details><summary>요청 예</summary>
+
+```
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/tags?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3"
+```
+
+</details>
+
+#### 응답
+
+* [응답 본문 헤더 설명 생략]
+    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+
+[응답 본문 데이터]
+
+| 이름 | 타입 | 필수 | 예제 | 설명 |
+| --- | --- | --- | --- | --- |
+| data.totalCount | Number | O | 2 | 총 검색 결과 개수 |
+| data.query | String | O | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&item_limit=3` | 검색 질의 |
+| data.items[].type | String | O | JACKET | 감지된 아이템의 type |
+| data.items[].score | float32 | O | 0.9515 | 감지된 아이템의 신뢰도 |
+| data.items[].tags | Array of json object | O |  | 감지된 아이템 태그 정보의 배열 |
+| data.items[].tags[].attribute | String | O | category | 태그의 속성  |
+| data.items[].tags[].labels | Array of json object | O |  | 태그 라벨의 배열 |
+| data.items[].tags[].labels[].label | String | O | 블라우스 \| Blouse | 태그 라벨<br/>URL Parameter의 lang에 의해 응답 언어가 달라짐  |
+| data.items[].tags[].labels[].score | float32 | O | 0.9545 | 태그 라벨의 신뢰도 |
+| data.items[].center | float64 array | O | [0.825047801147227, 0.330948979591837] | 감지된 아이템의 중앙 x, y 좌표 % |
+| data.items[].b0 | float64 array | O | [0.676864247418738, 0.219377551020408] | 감지된 아이템의 x0, y0 좌표 % |
+| data.items[].b1 | float64 array | O | [0.973231355525813, 0.4426204081632654] | 감지된 아이템의 x1, y1 좌표 % |
+
+<br>
+<details><summary>응답 본문 예</summary>
+
+``` json
+{
+    "header": {
+        "isSuccessful": true,
+        "resultCode": 0,
+        "resultMessage": "SUCCESS"
+    },
+    "data": {
+        "totalCount": 2,
+        "query": "path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3",
+        "items": [{
+                "type": "JACKET",
+                "tags":[
+                    {
+                        "attribute":"category",
+                        "labels":[{
+                            "label":"블라우스",
+                            "score":0.989715
+                        }]
+                    }
+                ],
+                "center": [0.825047801172275, 0.330998979591837],
+                "b0": [0.676864244718738, 0.219387751020408],
+                "b1": [0.973231357555813, 0.4426020401632654],
+                "score": 0.9321
+            },
+            {
+
+                "type": "JACKET",
+                "tags":[
+                    {
+                        "attribute":"category",
+                        "labels":[{
+                            "label":"블라우스",
+                            "score":0.989715
+                        }]
+                    }
+                ],
+                "center": [0.3929254301032506, 0.572066265306123],
+                "b0": [0.3288718929253023, 0.506377551204082],
+                "b1": [0.456978967952199, 0.637751020408163],
+                "score": 0.9321
             }
         ]
     }
