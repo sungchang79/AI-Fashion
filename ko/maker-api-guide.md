@@ -341,10 +341,10 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
     * desc: 내림차순
 
 #### 색인 상태
-* 색인 상태값을 조건으로 검색할 수 있습니다.
-    * reserved : 대기
-    * running : 진행 중
-    * failed : 전체 실패
+* 색인 상탯값을 조건으로 검색할 수 있습니다.
+    * reserved: 대기
+    * running: 진행 중
+    * failed: 전체 실패
     * finished: 완료(부분 실패 포함)
 
 <details>
@@ -369,7 +369,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 | data.items[].service | String | O | testserviceid | 해당 색인요청이 발생한 서비스명 |
 | data.items[].id | String | O | 24bb94b3-8a6b-488e-b038-4f6038da2596 | 색인 ID |
 | data.items[].filename | String | O | 202106251000_product.jsonl | 색인 파일 이름 |
-| data.items[].status | string | O | reserved | 현재 색인 상태를 나타냅니다<br/>reserved : 대기<br/>running : 진행 중<br/>failed : 전체 실패<br/>finished: 완료(부분 실패 포함) |
+| data.items[].status | string | O | reserved | 현재 색인 상태를 나타냅니다<br/>reserved: 대기<br/>running: 진행 중<br/>failed: 전체 실패<br/>finished: 완료(부분 실패 포함) |
 | data.items[].reservedTime | unix timestamp | O | 1625098033 | 색인 등록 시간 |
 | data.items[].startTime | unix timestamp | O | 1625098033 | 색인 시작 시간 |
 | data.items[].finishTime | unix timestamp | O | 1625098033 | 색인이 완료된 시간 |
