@@ -1,3 +1,4 @@
+
 ## AI Service > AI Fashion > Service API Guide
 
 - This guide describes APIs required to use the AI Fashion Search service.
@@ -25,7 +26,7 @@
 * If the width and height of a fashion item in the input image are both 20px or below, the item is not recognized.
 * For more accurate recognition, the size of a fashion item needs to increase as the image size increases.
 * For more accurate recognition, a fashion item needs to take up a larger portion in the image.
-* Maximum image size: 5,000,000 bytes
+* Maximum size of image file: 5,000,000 bytes (For [tag API](#tag-api): 1,000,000 bytes)
 * Supported image formats: PNG, JPEG, GIF
 
 <span id="common-response"></span>
@@ -65,7 +66,7 @@
 }
 ```
 
-## API Contents
+## Service Management
 
 ### Register Service ID
 
@@ -255,6 +256,8 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
 | -50000 | InternalServerError | Server error. |
 
+## Similar Item Recommendations
+
 ### Search By ProductID
 
 * API to search for products including similar fashion items based on product ID.
@@ -300,7 +303,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 100 | Total count of search results |
+| data.totalCount | Number | O | 100 | Total number of search results |
 | data.query | String | O | productID=10234455&limit=100 | Search query |
 | data.items[].similarity | Number | O | 0.91234 | Search similarity score |
 | data.items[].productID | String | O | 8980335 | Product ID |
@@ -341,6 +344,8 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
 | -42000 | NotExistServiceID | Unregistered service ID. |
 | -50000 | InternalServerError | Server error. |
+
+## Camera Search
 
 ### Detect
 
@@ -384,7 +389,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 100 | Total count of search results |
+| data.totalCount | Number | O | 100 | Total number of search results |
 | data.query | String | O | `path=https://imagecdn.co.kr/sample_image.jpg` | Search query |
 | data.items[].link | String | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | A link to be used in search by image API. |
 | data.items[].center | float64 array | O | [0.825047801147227, 0.330948979591837] | Center x, y coordinate % of a detected item |
@@ -440,14 +445,6 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45060 | ImageTimeoutError | Image download timeout occurred. |
 | -50000 | InternalServerError | Server error. |
 
-##### Response Code
-
-* Always 200.
-
-| Status | Description |
-| --- | --- |
-| 200 | OK |
-
 ### Search By Image
 
 * API to search for products including similar fashion items based on the link received as the response from detect API.
@@ -491,7 +488,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 100 | Total count of search results |
+| data.totalCount | Number | O | 100 | Total number of search results |
 | data.query | String | O | link=eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0=&limit=100 | Search query |
 | data.items[].similarity | Number | O | 0.91234 | Search similarity score |
 | data.items[].productID | String | O | 8980335 | Product ID |
@@ -535,3 +532,130 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45050 | InvalidImageURLException | The URL is not accessible. |
 | -45060 | ImageTimeoutError | Image download timeout occurred. |
 | -50000 | InternalServerError | Server error. |
+
+## Deep Tagging
+
+<span id="tag-api"></span>
+### Tag
+
+* API to detect tag information of fashion items in the input image.
+
+#### Request
+
+[URI]
+
+| Method | URI |
+| --- | --- |
+| GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/tag |
+
+[Path Variable]
+
+| Name | Description |
+| --- | --- |
+| appKey | Integrated Appkey or service Appkey |
+| serviceID | Service ID |
+
+[URL Parameter]
+
+| Name | Type | Required | Example | Description |
+| --- | --- | --- | --- | --- |
+| path | String | X | `https://imagecdn.co.kr/sample_image.jpg` | URL of the URL-encoded image |
+| lang | String | X | ko | Language of the label<br/>default: en<br/>en: English<br/>ko: Korean |
+| item_limit | int | X | 3 | Number of items to respond with tag information among fashion items found in the image<br/>Sort items in the descending order of width<br/>default : 1<br/>Maximum size<br>Can be set in value from to 1 to 4 |
+
+<details><summary>Request Example</summary>
+
+```
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/tags?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3"
+```
+
+</details>
+
+#### Response
+
+* [Response Body Header description omitted]
+    * This information is available in [Response Common Information](./service-api-guide/#common-response).
+
+[Response Body Data]
+
+| Name | Type | Required | Example | Description |
+| --- | --- | --- | --- | --- |
+| data.totalCount | Number | O | 2 | Total number of search results |
+| data.query | String | O | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&item_limit=3` | Search query |
+| data.items[].type | String | O | JACKET | Type of the detected item |
+| data.items[].score | float32 | O | 0.9515 | Confidence score of a detected item |
+| data.items[].tags | Array of json object | O |  | Array of detected item tag information |
+| data.items[].tags[].attribute | String | O | category | Tag attribute  |
+| data.items[].tags[].labels | Array of json object | O |  | Array of tag labels |
+| data.items[].tags[].labels[].label | String | O | blouse \| Blouse | Tag label <br/>The response language is different depending on the lang of the URL parameter.  |
+| data.items[].tags[].labels[].score | float32 | O | 0.9545 | Confidence score of tag labels |
+| data.items[].center | float64 array | O | [0.825047801147227, 0.330948979591837] | Center x, y coordinate % of a detected item |
+| data.items[].b0 | float64 array | O | [0.676864247418738, 0.219377551020408] | x0, y0 coordinate % of a detected item |
+| data.items[].b1 | float64 array | O | [0.973231355525813, 0.4426204081632654] | x1, y1 coordinate % of a detected item |
+
+<br>
+<details><summary>Response Body Example</summary>
+
+``` json
+{
+    "header": {
+        "isSuccessful": true,
+        "resultCode": 0,
+        "resultMessage": "SUCCESS"
+    },
+    "data": {
+        "totalCount": 2,
+        "query": "path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3",
+        "items": [{
+                "type": "JACKET",
+                "tags":[
+                    {
+                        "attribute":"category",
+                        "labels":[{
+                            "label":"blouse",
+                            "score":0.989715
+                        }]
+                    }
+                ],
+                "center": [0.825047801172275, 0.330998979591837],
+                "b0": [0.676864244718738, 0.219387751020408],
+                "b1": [0.973231357555813, 0.4426020401632654],
+                "score": 0.9321
+            },
+            {
+
+                "type": "JACKET",
+                "tags":[
+                    {
+                        "attribute":"category",
+                        "labels":[{
+                            "label":"blouse",
+                            "score":0.989715
+                        }]
+                    }
+                ],
+                "center": [0.3929254301032506, 0.572066265306123],
+                "b0": [0.3288718929253023, 0.506377551204082],
+                "b1": [0.456978967952199, 0.637751020408163],
+                "score": 0.9321
+            }
+        ]
+    }
+}
+```
+
+</details>
+
+#### Error Codes
+
+| resultCode | resultMessage | Description |
+| --- | --- | --- |
+| -40000 | InvalidParam | There is an error in the parameter. |
+| -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
+| -42000 | NotExistServiceID | Unregistered service ID. |
+| -45020 | ImageTooLargeException | The size of the image file is too large.<br>See [Input Image Guide](./service-api-guide/#input-image-guide). |
+| -45040 | InvalidImageFormatException | Unsupported image file format.<br>See [Input Image Guide](./service-api-guide/#input-image-guide). |
+| -45050 | InvalidImageURLException | The URL is not accessible. |
+| -45060 | ImageTimeoutError | Image download timeout occurred. |
+| -50000 | InternalServerError | Server error. |
+
