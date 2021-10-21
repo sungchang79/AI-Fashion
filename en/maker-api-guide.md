@@ -87,7 +87,7 @@
 * If the width and height of a fashion item in the image are both 20px or below, the item is not recognized.
 * For more accurate recognition, the size of a fashion item needs to increase as the image size increases.
 * For more accurate recognition, a fashion item needs to take up a larger portion in the image.
-* Maximum image size: 5,000,000 bytes
+* Maximum size of image file: 5,000,000 bytes
 * Supported image formats: PNG, JPEG, GIF
 
 ##### jsonl Example
