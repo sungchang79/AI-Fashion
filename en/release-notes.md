@@ -1,4 +1,7 @@
 ## AI Service > AI Fashion > Release Notes
 
-### 2021. 09. 28.
+### October 26, 2021
+* Added Deep Tagging API (tag)
+
+### September 28, 2021
 * AI Fashion service released
