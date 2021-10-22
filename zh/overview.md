@@ -17,9 +17,10 @@ The main features of AI Fashion are as follows.
     * This feature searches for and recommends products with images similar to those registered in the shopping mall.
     * In addition to product images, you can use category information to filter and recommend only the products belonging to a desired category.
 
-* **Deep Tagging** - To be released
+* **Deep Tagging**
     * This feature analyzes the image and returns various property information such as category, color, material, and pattern.
     * By integrating with the product registration management system, you can enter product information quickly and accurately and use it to implement a detailed search filter.
+    * Currently, only tag for clothing is supported, and tags for shoes, bags, caps, etc. will be added in the future.
 
 ## Service Targets
 

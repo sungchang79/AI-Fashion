@@ -87,7 +87,7 @@
 * If the width and height of a fashion item in the image are both 20px or below, the item is not recognized.
 * For more accurate recognition, the size of a fashion item needs to increase as the image size increases.
 * For more accurate recognition, a fashion item needs to take up a larger portion in the image.
-* Maximum image size: 5,000,000 bytes
+* Maximum size of image file: 5,000,000 bytes
 * Supported image formats: PNG, JPEG, GIF
 
 ##### jsonl Example
@@ -342,9 +342,9 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 
 #### Indexing Status
 * Indexing status value can be searched by conditions.
-    * reserved : Pending
-    * running : In-progress
-    * failed : Completely failed
+    * reserved: Pending
+    * running: In-progress
+    * failed: All failed
     * finished: Finished (including partially failed)
 
 <details>
@@ -369,7 +369,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 | data.items[].service | String | O | testserviceid | Name of the service for which indexing request occurred |
 | data.items[].id | String | O | 24bb94b3-8a6b-488e-b038-4f6038da2596 | Indexing ID |
 | data.items[].filename | String | O | 202106251000_product.jsonl | Indexing file name |
-| data.items[].status | string | O | reserved | Represents the current indexing status.<br/>reserved : Pending<br/>running : In-progress<br/>failed : Completely failed<br/>finished: Finished (including partially failed) |
+| data.items[].status | string | O | reserved | Represents the current indexing status.<br/>reserved: Pending<br/>running: In-progress<br/>failed: All failed<br/>finished: Finished (including partially failed) |
 | data.items[].reservedTime | unix timestamp | O | 1625098033 | Indexing registration time |
 | data.items[].startTime | unix timestamp | O | 1625098033 | Indexing start time |
 | data.items[].finishTime | unix timestamp | O | 1625098033 | Indexing finish time |
