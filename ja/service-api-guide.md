@@ -255,7 +255,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | -41000 | UnauthorizedAppKey | 承認されていないAppkey |
 | -50000 | InternalServerError | サーバーエラー |
 
-## 유사 이미지 상품 추천
+## 類似画像商品推薦
 
 ### Search By ProductID
 
@@ -344,7 +344,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -42000 | NotExistServiceID | 登録されていないサービスID |
 | -50000 | InternalServerError | サーバーエラー |
 
-## 카메라 검색
+## カメラ検索
 
 ### Detect
 
@@ -532,37 +532,37 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45060 | ImageTimeoutError | 画像ダウンロード時間超過 |
 | -50000 | InternalServerError | サーバーエラー |
 
-## 딥 태깅
+## ディープタギング
 
 <span id="tag-api"></span>
 ### Tag
 
-* 입력 이미지에서 패션 아이템의 태그 정보를 감지하는 API입니다.
+* 入力画像からファッションアイテムのタグ情報を検出するAPIです。
 
-#### 요청
+#### リクエスト
 
 [URI]
 
-| 메서드 | URI |
+| メソッド | URI |
 | --- | --- |
 | GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/tag |
 
 [Path Variable]
 
-| 이름 | 설명 |
+| 名前 | 説明 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
-| serviceID | 서비스 아이디 |
+| appKey | 統合AppkeyまたはサービスAppkey |
+| serviceID | サービスID |
 
 [URL Parameter]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| path | String | X | `https://imagecdn.co.kr/sample_image.jpg` | URL Encode된 이미지 URL |
-| lang | String | X | ko | label의 언어<br/>default: en<br/>en: English<br/>ko: Korean |
-| item_limit | int | X | 3 | 이미지에서 발견된 패션 아이템 중 태그 정보를 응답할 아이템 숫자<br/>아이템의 너비가 긴 순서로 정렬<br/>default: 1<br/>최대 크기<br>1 이상 4 이하로 설정 가능 |
+| path | String | X | `https://imagecdn.co.kr/sample_image.jpg` | URL Encodeされた画像URL |
+| lang | String | X | ko | labelの言語<br/>default: en<br/>en: English<br/>ko: Korean |
+| item_limit | int | X | 3 | 画像で見つかったファッションアイテムのうち、タグ情報を返すアイテムの数<br/>アイテムの幅が長い順にソート<br/>default：1<br/>最大サイズ<br>1以上4以下に設定可能 |
 
-<details><summary>요청 예</summary>
+<details><summary>リクエスト例</summary>
 
 ```
 curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/tags?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3"
@@ -570,30 +570,30 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 응답
+#### レスポンス
 
-* [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+* [レスポンス本文ヘッダ説明省略]
+    * [レスポンス共通情報](./service-api-guide/#common-response)で確認可能
 
-[응답 본문 데이터]
+[レスポンス本文データ]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.totalCount | Number | O | 2 | 총 검색 결과 개수 |
-| data.query | String | O | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&item_limit=3` | 검색 질의 |
-| data.items[].type | String | O | JACKET | 감지된 아이템의 type |
-| data.items[].score | float32 | O | 0.9515 | 감지된 아이템의 신뢰도 |
-| data.items[].tags | Array of json object | O |  | 감지된 아이템 태그 정보의 배열 |
-| data.items[].tags[].attribute | String | O | category | 태그의 속성  |
-| data.items[].tags[].labels | Array of json object | O |  | 태그 라벨의 배열 |
-| data.items[].tags[].labels[].label | String | O | 블라우스 \| Blouse | 태그 라벨<br/>URL Parameter의 lang에 의해 응답 언어가 달라짐  |
-| data.items[].tags[].labels[].score | float32 | O | 0.9545 | 태그 라벨의 신뢰도 |
-| data.items[].center | float64 array | O | [0.825047801147227, 0.330948979591837] | 감지된 아이템의 중앙 x, y 좌표 % |
-| data.items[].b0 | float64 array | O | [0.676864247418738, 0.219377551020408] | 감지된 아이템의 x0, y0 좌표 % |
-| data.items[].b1 | float64 array | O | [0.973231355525813, 0.4426204081632654] | 감지된 아이템의 x1, y1 좌표 % |
+| data.totalCount | Number | O | 2 | 検索結果の総数 |
+| data.query | String | O | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&item_limit=3` | 検索クエリ |
+| data.items[].type | String | O | JACKET | 検出されたアイテムのtype |
+| data.items[].score | float32 | O | 0.9515 | 検出されたアイテムの信頼度 |
+| data.items[].tags | Array of json object | O |  | 検出されたアイテムタグ情報の配列 |
+| data.items[].tags[].attribute | String | O | category | タグのプロパティ |
+| data.items[].tags[].labels | Array of json object | O |  | タグラベルの配列 |
+| data.items[].tags[].labels[].label | String | O | ブラウス\| Blouse | タグラベル<br/>URL Parameterのlangによりレスポンス言語が異なる |
+| data.items[].tags[].labels[].score | float32 | O | 0.9545 | タグラベルの信頼度 |
+| data.items[].center | float64 array | O | [0.825047801147227, 0.330948979591837] | 検出されたアイテムの中央x、y座標% |
+| data.items[].b0 | float64 array | O | [0.676864247418738, 0.219377551020408] | 検出されたアイテムのx0、y0座標% |
+| data.items[].b1 | float64 array | O | [0.973231355525813, 0.4426204081632654] | 検出されたアイテムのx1、y1座標% |
 
 <br>
-<details><summary>응답 본문 예</summary>
+<details><summary>レスポンス本文例</summary>
 
 ``` json
 {
@@ -611,7 +611,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
                     {
                         "attribute":"category",
                         "labels":[{
-                            "label":"블라우스",
+                            "label":"ブラウス",
                             "score":0.989715
                         }]
                     }
@@ -627,7 +627,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
                     {
                         "attribute":"category",
                         "labels":[{
-                            "label":"블라우스",
+                            "label":"ブラウス",
                             "score":0.989715
                         }]
                     }
@@ -644,15 +644,15 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 오류 코드
+#### エラーコード
 
-| resultCode | resultMessage | 설명 |
+| resultCode | resultMessage | 説明 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
-| -45020 | ImageTooLargeException | 이미지 파일의 크기가 너무 큼<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
-| -45040 | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
-| -45050 | InvalidImageURLException | 접근할 수 없는 URL |
-| -45060 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
-| -50000 | InternalServerError | 서버 오류 |
+| -40000 | InvalidParam | パラメータにエラーがある |
+| -41000 | UnauthorizedAppKey | 承認されていないAppkey |
+| -42000 | NotExistServiceID | 登録されていないサービスID |
+| -45020 | ImageTooLargeException | 画像ファイルのサイズが大きすぎる<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
+| -45040 | InvalidImageFormatException | サポートしない画像ファイル形式<br>[入力画像ガイド](./service-api-guide/#input-image-guide)参考 |
+| -45050 | InvalidImageURLException | アクセスできないURL |
+| -45060 | ImageTimeoutError | 画像ダウンロード時間超過 |
+| -50000 | InternalServerError | サーバーエラー |
