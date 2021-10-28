@@ -559,14 +559,14 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| path | String | X | `https://imagecdn.co.kr/sample_image.jpg` | URL Encode된 이미지 URL |
+| path | String | O | `https://imagecdn.co.kr/sample_image.jpg` | URL Encode된 이미지 URL |
 | lang | String | X | ko | label의 언어<br/>default: en<br/>en: English<br/>ko: Korean |
 | item_limit | int | X | 3 | 이미지에서 발견된 패션 아이템 중 태그 정보를 응답할 아이템 숫자<br/>아이템의 너비가 긴 순서로 정렬<br/>default: 1<br/>최대 크기<br>1 이상 4 이하로 설정 가능 |
 
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/tags?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/tag?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3"
 ```
 
 </details>
@@ -607,39 +607,66 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
         "totalCount": 2,
         "query": "path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3",
         "items": [{
-                "type": "JACKET",
-                "tags":[
-                    {
-                        "attribute":"category",
-                        "labels":[{
-                            "label":"블라우스",
-                            "score":0.989715
-                        }]
-                    }
-                ],
-                "center": [0.825047801172275, 0.330998979591837],
-                "b0": [0.676864244718738, 0.219387751020408],
-                "b1": [0.973231357555813, 0.4426020401632654],
-                "score": 0.9321
-            },
-            {
-
-                "type": "JACKET",
-                "tags":[
-                    {
-                        "attribute":"category",
-                        "labels":[{
-                            "label":"블라우스",
-                            "score":0.989715
-                        }]
-                    }
-                ],
-                "center": [0.3929254301032506, 0.572066265306123],
-                "b0": [0.3288718929253023, 0.506377551204082],
-                "b1": [0.456978967952199, 0.637751020408163],
-                "score": 0.9321
-            }
-        ]
+            "type": "SHIRT",
+            "tags": [{
+                "attribute": "category", "labels": [{ "label": "블라우스", "score": 0.9966272115707397 }]
+            }, {
+                "attribute": "color", "labels": [{ "label": "베이지/아이보리", "score": 0.7692235112190247 }]
+            }, {
+                "attribute": "pattern", "labels": [{ "label": "무지", "score": 0.9893960356712341 }]
+            }, {
+                "attribute": "fabric", "labels": [{ "label": "실크", "score": 0.586938738822937 }]
+            }, {
+                "attribute": "neckline", "labels": [{ "label": "셔츠칼라", "score": 0.9922573566436768 }]
+            }, {
+                "attribute": "shoulder", "labels": [{ "label": "퍼프/볼륨", "score": 0.5369117856025696 }]
+            }, {
+                "attribute": "sleeve_length", "labels": [{ "label": "긴소매", "score": 0.6998409032821655 }]
+            }, {
+                "attribute": "sleeve_shape", "labels": [{ "label": "스트레이트/일자", "score": 0.689109206199646 }]
+            }, {
+                "attribute": "length_up", "labels": [{ "label": "허리선", "score": 0.9575495719909668 }]
+            }, {
+                "attribute": "age", "labels": [{ "label": "어른", "score": 0.9985153079032898 }]
+            }, {
+                "attribute": "gender", "labels": [{ "label": "여성", "score": 0.9960111379623413 }]
+            }, {
+                "attribute": "detail", "labels": [{ "label": "버튼", "score": 0.9440848231315613 }]
+            }, {
+                "attribute": "fit", "labels": [{ "label": "기본핏/레귤러핏", "score": 0.789472222328186 }]
+            }],
+            "center": [ 0.46125, 0.34125 ],
+            "b0": [ 0.1875, 0.0175 ],
+            "b1": [ 0.735, 0.665 ],
+            "score": 0.93118
+        }, {
+            "type": "SKIRT",
+            "tags": [{
+                "attribute": "category", "labels": [{ "label": "스커트", "score": 0.9997897744178772 }]
+            }, {
+                "attribute": "color", "labels": [{ "label": "브라운/갈색", "score": 0.8597127199172974 }]
+            }, {
+                "attribute": "pattern", "labels": [{ "label": "무지", "score": 0.988312304019928 }]
+            }, {
+                "attribute": "fabric", "labels": [{ "label": "캔버스", "score": 0.24775846302509308 }]
+            }, {
+                "attribute": "length_lo", "labels": [{ "label": "숏", "score": 0.9987099170684814 }]
+            }, {
+                "attribute": "age", "labels": [{ "label": "어른", "score": 0.9993846416473389 }]
+            }, {
+                "attribute": "gender", "labels": [{ "label": "여성", "score": 0.9950520396232605 }]
+            }, {
+                "attribute": "detail", "labels": [{ "label": "랩스타일", "score": 0.7058117985725403 }]
+            }, {
+                "attribute": "fit", "labels": [{ "label": "기본핏/레귤러핏", "score": 0.9844645857810974 }]
+            }, {
+                "attribute": "shape", "labels": [{ "label": "A라인/플레어", "score": 0.9432026743888855 }]
+            }],
+            "center": [ 0.5, 0.69125 ],
+            "b0": [ 0.28, 0.445 ],
+            "b1": [ 0.72, 0.9375 ],
+            "score": 0.939945
+        }]
     }
 }
 ```

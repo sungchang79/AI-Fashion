@@ -559,14 +559,14 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
-| path | String | X | `https://imagecdn.co.kr/sample_image.jpg` | URL of the URL-encoded image |
+| path | String | O | `https://imagecdn.co.kr/sample_image.jpg` | URL of the URL-encoded image |
 | lang | String | X | ko | Language of the label<br/>default: en<br/>en: English<br/>ko: Korean |
 | item_limit | int | X | 3 | Number of items to respond with tag information among fashion items found in the image<br/>Sort items in the descending order of width<br/>default: 1<br/>Maximum size<br>Can be set in value from to 1 to 4 |
 
 <details><summary>Request Example</summary>
 
 ```
-curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/tags?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/tag?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=en&item_limit=3"
 ```
 
 </details>
@@ -605,41 +605,68 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
     },
     "data": {
         "totalCount": 2,
-        "query": "path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3",
+        "query": "path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=en&item_limit=3",
         "items": [{
-                "type": "JACKET",
-                "tags":[
-                    {
-                        "attribute":"category",
-                        "labels":[{
-                            "label":"blouse",
-                            "score":0.989715
-                        }]
-                    }
-                ],
-                "center": [0.825047801172275, 0.330998979591837],
-                "b0": [0.676864244718738, 0.219387751020408],
-                "b1": [0.973231357555813, 0.4426020401632654],
-                "score": 0.9321
-            },
-            {
-
-                "type": "JACKET",
-                "tags":[
-                    {
-                        "attribute":"category",
-                        "labels":[{
-                            "label":"blouse",
-                            "score":0.989715
-                        }]
-                    }
-                ],
-                "center": [0.3929254301032506, 0.572066265306123],
-                "b0": [0.3288718929253023, 0.506377551204082],
-                "b1": [0.456978967952199, 0.637751020408163],
-                "score": 0.9321
-            }
-        ]
+            "type": "SHIRT",
+            "tags": [{
+                "attribute": "category", "labels": [{ "label": "Blouse", "score": 0.9966272115707397 }]
+            }, {
+                "attribute": "color", "labels": [{ "label": "Beige", "score": 0.7692235112190247 }]
+            }, {
+                "attribute": "pattern", "labels": [{ "label": "Solid", "score": 0.9893960356712341 }]
+            }, {
+                "attribute": "fabric", "labels": [{ "label": "Silk", "score": 0.586938738822937 }]
+            }, {
+                "attribute": "neckline", "labels": [{ "label": "ShirtCollar", "score": 0.9922573566436768 }]
+            }, {
+                "attribute": "shoulder", "labels": [{ "label": "PuffShoulder", "score": 0.5369117856025696 }]
+            }, {
+                "attribute": "sleeve_length", "labels": [{ "label": "LongSleeve", "score": 0.6998409032821655 }]
+            }, {
+                "attribute": "sleeve_shape", "labels": [{ "label": "Straight", "score": 0.689109206199646 }]
+            }, {
+                "attribute": "length_up", "labels": [{ "label": "Waist", "score": 0.9575495719909668 }]
+            }, {
+                "attribute": "age", "labels": [{ "label": "Adult", "score": 0.9985153079032898 }]
+            }, {
+                "attribute": "gender", "labels": [{ "label": "Female", "score": 0.9960111379623413 }]
+            }, {
+                "attribute": "detail", "labels": [{ "label": "Buttoned", "score": 0.9440848231315613 }]
+            }, {
+                "attribute": "fit", "labels": [{ "label": "Normal/Regular", "score": 0.789472222328186 }]
+            }],
+            "center": [ 0.46125, 0.34125 ],
+            "b0": [ 0.1875, 0.0175 ],
+            "b1": [ 0.735, 0.665 ],
+            "score": 0.93118
+        }, {
+            "type": "SKIRT",
+            "tags": [{
+                "attribute": "category", "labels": [{ "label": "Skirt", "score": 0.9997897744178772 }]
+            }, {
+                "attribute": "color", "labels": [{ "label": "Brown", "score": 0.8597127199172974 }]
+            }, {
+                "attribute": "pattern", "labels": [{ "label": "Solid", "score": 0.988312304019928 }]
+            }, {
+                "attribute": "fabric", "labels": [{ "label": "Canvas", "score": 0.24775846302509308 }]
+            }, {
+                "attribute": "length_lo", "labels": [{ "label": "Short/Thigh", "score": 0.9987099170684814 }]
+            }, {
+                "attribute": "age", "labels": [{ "label": "Adult", "score": 0.9993846416473389 }]
+            }, {
+                "attribute": "gender", "labels": [{ "label": "Female", "score": 0.9950520396232605 }]
+            }, {
+                "attribute": "detail", "labels": [{ "label": "WrapStyle", "score": 0.7058117985725403 }]
+            }, {
+                "attribute": "fit", "labels": [{ "label": "Normal/Regular", "score": 0.9844645857810974 }]
+            }, {
+                "attribute": "shape", "labels": [{ "label": "A-line", "score": 0.9432026743888855 }]
+            }],
+            "center": [ 0.5, 0.69125 ],
+            "b0": [ 0.28, 0.445 ],
+            "b1": [ 0.72, 0.9375 ],
+            "score": 0.939945
+        }]
     }
 }
 ```
