@@ -305,7 +305,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | --- | --- | --- | --- | --- |
 | data.totalCount | Number | O | 100 | 총 검색 결과 개수 |
 | data.query | String | O | productID=10234455&limit=100 | 검색 질의 |
-| data.items[].similarity | Number | O | 0.91234 | 검색 적합도 점수 |
+| data.items[].similarity | Number | O | 0.91234 | 검색 유사도 점수 |
 | data.items[].productID | String | O | 8980335 | 상품 아이디 |
 
 <details><summary>응답 본문 예</summary>
@@ -490,7 +490,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | --- | --- | --- | --- | --- |
 | data.totalCount | Number | O | 100 | 총 검색 결과 개수 |
 | data.query | String | O | link=eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0=&limit=100 | 검색 질의 |
-| data.items[].similarity | Number | O | 0.91234 | 검색 적합도 점수 |
+| data.items[].similarity | Number | O | 0.91234 | 검색 유사도 점수 |
 | data.items[].productID | String | O | 8980335 | 상품 아이디 |
 
 <details><summary>응답 본문 예</summary>

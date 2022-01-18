@@ -304,7 +304,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | --- | --- | --- | --- | --- |
 | data.totalCount | Number | O | 100 | 検索結果の総数 |
 | data.query | String | O | productID=10234455&limit=100 | 検索クエリ |
-| data.items[].similarity | Number | O | 0.91234 | 検索適合度スコア |
+| data.items[].similarity | Number | O | 0.91234 | 検索類似度スコア |
 | data.items[].productID | String | O | 8980335 | 商品ID |
 
 <details><summary>レスポンス本文例</summary>
@@ -489,7 +489,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | --- | --- | --- | --- | --- |
 | data.totalCount | Number | O | 100 | 検索結果の総数 |
 | data.query | String | O | link=eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0=&limit=100 | 検索クエリ |
-| data.items[].similarity | Number | O | 0.91234 | 検索適合度スコア |
+| data.items[].similarity | Number | O | 0.91234 | 検索類似度スコア |
 | data.items[].productID | String | O | 8980335 | 商品ID |
 
 <details><summary>レスポンス本文例</summary>
