@@ -77,9 +77,9 @@
 | 상품ID | product_id | string | O | 72 | unique key |
 | 상태 | status | string | O | 7 | enable: 추가 또는 업데이트 <br/>disable: 삭제 |
 | 상품이름 | name | string | O | 256 | 상품명 |
-| 카테고리 1depth | category1_id | string | O | 72 | 카테고리 1depth 아이디 |
-| 카테고리 2depth | category2_id | string | O | 72 | 카테고리 2depth 아이디 |
-| 카테고리 3depth | category3_id | string | O | 72 | 카테고리 3depth 아이디 |
+| 카테고리 1depth | category1_id | string | O | 72 | 카테고리 1depth 아이디(only by numbers) |
+| 카테고리 2depth | category2_id | string | O | 72 | 카테고리 2depth 아이디(only by numbers) |
+| 카테고리 3depth | category3_id | string | O | 72 | 카테고리 3depth 아이디(only by numbers) |
 | 이미지url | image_url | string | O | 1000 | 접근 가능한 이미지 URL |
 
 ##### 이미지 가이드
@@ -92,15 +92,17 @@
 
 ##### jsonl 예
 ```
-{"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category_id1": "A001", "category_id2": "A001001", "category_id3": "A001001001", "image_url": "http://aaaaaaa.bbbbb.jpg"}
-{"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category_id1": "A001", "category_id2": "A001001", "category_id3": "A001001002", "image_url": "http://bbbbbbb.ccccc.jpg"}
+{"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://aaaaaaa.bbbbb.jpg"}
+{"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://bbbbbbb.ccccc.jpg"}
+{"product_id": "10003", "status": "enable", "name": "BBB blue blouse", "category_id1": "1", "category_id2": "1", "category_id3": "3", "image_url": "http://bbbbbbb.ddddd.jpg"}
 ...
 ```
 
 ##### csv 예
 ```
-10001,enable,AAA red onepiece,A001,A001001,A001001001,http://aaaaaaa.bbbbb.jpg
-10002,disable,BBB blue onepiece,A001,A001001,A001001002,http://bbbbbbb.ccccc.jpg
+10001,enable,AAA red onepiece,1,1,2,http://aaaaaaa.bbbbb.jpg
+10002,disable,BBB blue onepiece,1,1,2,http://bbbbbbb.ccccc.jpg
+10003,enable,BBB blue blouse,1,1,3,http://bbbbbbb.ddddd.jpg
 ...
 ```
 
