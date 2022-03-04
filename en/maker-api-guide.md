@@ -22,9 +22,11 @@
 
 [API Domain]
 
-| Environment | Domain |
+| Region | Domain |
 | --- | --- |
-| Real | https://ai-fashion.cloud.toast.com |
+| KOREA (Pangyo) | https://kr1-aifashion.api.nhncloudservice.com |
+| KOREA (Pyeongchon) | https://kr2-aifashion.api.nhncloudservice.com |
+| JAPAN (Tokyo) | https://jp1-aifashion.api.nhncloudservice.com |
 
 <span id="common-response"></span>
 ### Response Common Information
