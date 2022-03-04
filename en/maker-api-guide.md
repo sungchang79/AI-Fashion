@@ -77,9 +77,9 @@
 | Product ID | product_id | string | O | 72 | unique key |
 | Status | status | string | O | 7 | enable: Add or update <br/>disable: Delete |
 | Product name | name | string | O | 256 | Product name |
-| Category depth 1 | category1_id | string | O | 72 | Category depth 1 ID |
-| Category depth 2 | category2_id | string | O | 72 | Category depth 2 ID |
-| Category depth 3 | category3_id | string | O | 72 | Category depth 3 ID |
+| Category depth 1 | category1_id | string | O | 72 | Category depth 1 ID(only by numbers) |
+| Category depth 2 | category2_id | string | O | 72 | Category depth 2 ID(only by numbers) |
+| Category depth 3 | category3_id | string | O | 72 | Category depth 3 ID(only by numbers) |
 | Image URL | image_url | string | O | 1000 | Accessible image URL |
 
 ##### Image Guide
@@ -92,15 +92,17 @@
 
 ##### jsonl Example
 ```
-{"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category_id1": "A001", "category_id2": "A001001", "category_id3": "A001001001", "image_url": "http://aaaaaaa.bbbbb.jpg"}
-{"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category_id1": "A001", "category_id2": "A001001", "category_id3": "A001001002", "image_url": "http://bbbbbbb.ccccc.jpg"}
+{"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://aaaaaaa.bbbbb.jpg"}
+{"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://bbbbbbb.ccccc.jpg"}
+{"product_id": "10003", "status": "enable", "name": "BBB blue blouse", "category_id1": "1", "category_id2": "1", "category_id3": "3", "image_url": "http://bbbbbbb.ddddd.jpg"}
 ...
 ```
 
 ##### csv Example
 ```
-10001,enable,AAA red onepiece,A001,A001001,A001001001,http://aaaaaaa.bbbbb.jpg
-10002,disable,BBB blue onepiece,A001,A001001,A001001002,http://bbbbbbb.ccccc.jpg
+10001,enable,AAA red onepiece,1,1,2,http://aaaaaaa.bbbbb.jpg
+10002,disable,BBB blue onepiece,1,1,2,http://bbbbbbb.ccccc.jpg
+10003,enable,BBB blue blouse,1,1,3,http://bbbbbbb.ddddd.jpg
 ...
 ```
 
