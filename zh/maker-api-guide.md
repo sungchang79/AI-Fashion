@@ -199,6 +199,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
 | -42000 | NotExistServiceID | Unregistered service ID. |
 | -50000 | InternalServerError | Server error. |
+| 4041007 | URL Not Found | A request was made with an undefined API. |
 
 ### Service Information
 * Check the current information of services.
@@ -284,6 +285,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 | -40400 | NoApiFound | A request was made with an undefined API. |
 | -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
 | -50000 | InternalServerError | Server error. |
+| 4041007 | URL Not Found | A request was made with an undefined API. |
 
 ### Indexing Status Query
 * Check the current status of requested indexing.
@@ -424,3 +426,4 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 | -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
 | -42000 | NotExistServiceID | Unregistered service ID. |
 | -50000 | InternalServerError | Server error. |
+| 4041007 | URL Not Found | A request was made with an undefined API. |

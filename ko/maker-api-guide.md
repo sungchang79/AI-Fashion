@@ -199,6 +199,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
 | -50000 | InternalServerError | 서버 오류 |
+| 4041007 | URL Not Found | 정의되지 않은 API로 요청한 경우 |
 
 ### 서비스 정보
 * 서비스들의 현재 정보를 확인합니다.
@@ -284,6 +285,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 | -40400 | NoApiFound | 정의되지 않은 API로 요청한 경우 |
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -50000 | InternalServerError | 서버 오류 |
+| 4041007 | URL Not Found | 정의되지 않은 API로 요청한 경우 |
 
 ### 색인 상태 조회
 * 요청된 색인들의 현재 상태를 확인합니다.
@@ -424,3 +426,4 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
 | -50000 | InternalServerError | 서버 오류 |
+| 4041007 | URL Not Found | 정의되지 않은 API로 요청한 경우 |

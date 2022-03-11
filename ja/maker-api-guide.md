@@ -199,6 +199,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -41000 | UnauthorizedAppKey | 承認されていないAppkey |
 | -42000 | NotExistServiceID | 登録されていないサービスID |
 | -50000 | InternalServerError | サーバーエラー |
+| 4041007 | URL Not Found | 定義されていないapiでリクエストした場合 |
 
 ### サービス情報
 * サービスの現在情報を確認します。
@@ -284,6 +285,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 | -40400 | NoApiFound | 定義されていないapiでリクエストした場合 |
 | -41000 | UnauthorizedAppKey | 承認されていないAppkey |
 | -50000 | InternalServerError | サーバーエラー |
+| 4041007 | URL Not Found | 定義されていないapiでリクエストした場合 |
 
 ### インデックス状態照会
 * リクエストされたインデックスの現現在状態を確認します。
@@ -424,3 +426,4 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 | -41000 | UnauthorizedAppKey | 承認されていないAppkey |
 | -42000 | NotExistServiceID | 登録されていないサービスID |
 | -50000 | InternalServerError | サーバーエラー |
+| 4041007 | URL Not Found | 定義されていないapiでリクエストした場合 |
