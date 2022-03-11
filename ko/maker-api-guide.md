@@ -223,7 +223,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services
 <summary>요청 예 </summary>
 
 ```
-curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-Type: application/json"
+curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services" -H "Content-Type: application/json"
 ```
 
 </details>
