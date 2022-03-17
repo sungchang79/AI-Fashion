@@ -77,11 +77,11 @@
 | 名前 | field | value type | 必須 | max length | 備考 |
 | -- | -- | -- | -- | -- | -- |
 | 商品ID | product_id | string | O | 72 | unique key |
-| 状態 | status | string | O | 7 | enable：追加またはアップデート <br/>disable：削除 |
+| 状態 | status | string | O | 7 | enable：追加またはアップデート<br/>disable：削除 |
 | 商品名 | name | string | O | 256 | 商品名 |
-| カテゴリー1depth | category1_id | string | O | 72 | カテゴリー1depthID(only by numbers) |
-| カテゴリー2depth | category2_id | string | O | 72 | カテゴリー2depthID(only by numbers) |
-| カテゴリー3depth | category3_id | string | O | 72 | カテゴリー3depthID(only by numbers) |
+| カテゴリー1depth | category1_id | string | O | 10 | フィルターとして使用（音ではなく整数）<br/>0 <= category1_id <= 4294967295 |
+| カテゴリー2depth | category2_id | string | O | 10 | フィルターとして使用（音ではなく整数）<br/>0 <= category2_id <= 4294967295 |
+| カテゴリー3depth | category3_id | string | O | 10 | フィルターとして使用（音ではなく整数）<br/>0 <= category3_id <= 4294967295 |
 | 画像url | image_url | string | O | 1000 | アクセス可能な画像URL |
 
 ##### 画像ガイド
@@ -375,7 +375,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 | data.items[].service | String | O | testserviceid | 該当インデックスリクエストが発生したサービス名 |
 | data.items[].id | String | O | 24bb94b3-8a6b-488e-b038-4f6038da2596 | インデックスID |
 | data.items[].filename | String | O | 202106251000_product.jsonl | インデックスファイル名 |
-| data.items[].status | string | O | reserved | 現在のインデックス状態を表します。<br/>reserved：待機<br/>running：進行中 <br>failed：全て失敗<br/>finished：完了(部分失敗を含む) |
+| data.items[].status | string | O | reserved | 現在のインデックス状態を表します。<br/>reserved：待機<br/>running：進行中<br/>failed：全て失敗<br/>finished：完了(部分失敗を含む) |
 | data.items[].reservedTime | unix timestamp | O | 1625098033 | インデックス登録時間 |
 | data.items[].startTime | unix timestamp | O | 1625098033 | インデックス開始時間 |
 | data.items[].finishTime | unix timestamp | O | 1625098033 | インデックスが完了した時間 |
