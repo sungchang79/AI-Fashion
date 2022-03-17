@@ -77,11 +77,11 @@
 | Name | field | value type | Required | max length | Note |
 | -- | -- | -- | -- | -- | -- |
 | Product ID | product_id | string | O | 72 | unique key |
-| Status | status | string | O | 7 | enable: Add or update <br/>disable: Delete |
+| Status | status | string | O | 7 | enable: Add or update<br/>disable: Delete |
 | Product name | name | string | O | 256 | Product name |
-| Category depth 1 | category1_id | string | O | 72 | Category depth 1 ID(only by numbers) |
-| Category depth 2 | category2_id | string | O | 72 | Category depth 2 ID(only by numbers) |
-| Category depth 3 | category3_id | string | O | 72 | Category depth 3 ID(only by numbers) |
+| Category depth 1 | category1_id | string | O | 10 | Use as a filter (non-negative integer)<br/>0 <= category1_id <= 4294967295 |
+| Category depth 2 | category2_id | string | O | 10 | Use as a filter (non-negative integer)<br/>0 <= category2_id <= 4294967295 |
+| Category depth 3 | category3_id | string | O | 10 | Use as a filter (non-negative integer)<br/>0 <= category3_id <= 4294967295 |
 | Image URL | image_url | string | O | 1000 | Accessible image URL |
 
 ##### Image Guide
@@ -311,7 +311,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
 | start | int | O | 0 | Start index.<br/>Starts from 0. |
-| limit | int | O | 100 | Max 100.<br/>start:0, limit:100 indicates 1-100. <br/>start:200, limit:100 indicates 201-300. |
+| limit | int | O | 100 | Max 100.<br/>start:0, limit:100 indicates 1-100.<br/>start:200, limit:100 indicates 201-300. |
 | order | string | X | "reservedTime:desc" | (Default) In descending order of the registration time<br/>Only one condition can be set<br/>For conditions that can set, see ['Sorting'](#indexes-status-order) |
 | status | string | X | "finished" | Status value of indexing |
 
