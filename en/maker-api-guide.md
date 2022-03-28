@@ -22,9 +22,11 @@
 
 [API Domain]
 
-| Environment | Domain |
+| Region | Domain |
 | --- | --- |
-| Real | https://ai-fashion.cloud.toast.com |
+| KOREA (Pangyo) | https://kr1-aifashion.api.nhncloudservice.com |
+| KOREA (Pyeongchon) | https://kr2-aifashion.api.nhncloudservice.com |
+| JAPAN (Tokyo) | https://jp1-aifashion.api.nhncloudservice.com |
 
 <span id="common-response"></span>
 ### Response Common Information
@@ -75,11 +77,11 @@
 | Name | field | value type | Required | max length | Note |
 | -- | -- | -- | -- | -- | -- |
 | Product ID | product_id | string | O | 72 | unique key |
-| Status | status | string | O | 7 | enable: Add or update <br/>disable: Delete |
+| Status | status | string | O | 7 | enable: Add or update<br/>disable: Delete |
 | Product name | name | string | O | 256 | Product name |
-| Category depth 1 | category1_id | string | O | 72 | Category depth 1 ID |
-| Category depth 2 | category2_id | string | O | 72 | Category depth 2 ID |
-| Category depth 3 | category3_id | string | O | 72 | Category depth 3 ID |
+| Category depth 1 | category1_id | string | O | 10 | Use as a filter (non-negative integer)<br/>0 <= category1_id <= 4294967295 |
+| Category depth 2 | category2_id | string | O | 10 | Use as a filter (non-negative integer)<br/>0 <= category2_id <= 4294967295 |
+| Category depth 3 | category3_id | string | O | 10 | Use as a filter (non-negative integer)<br/>0 <= category3_id <= 4294967295 |
 | Image URL | image_url | string | O | 1000 | Accessible image URL |
 
 ##### Image Guide
@@ -92,15 +94,17 @@
 
 ##### jsonl Example
 ```
-{"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category_id1": "A001", "category_id2": "A001001", "category_id3": "A001001001", "image_url": "http://aaaaaaa.bbbbb.jpg"}
-{"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category_id1": "A001", "category_id2": "A001001", "category_id3": "A001001002", "image_url": "http://bbbbbbb.ccccc.jpg"}
+{"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://aaaaaaa.bbbbb.jpg"}
+{"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://bbbbbbb.ccccc.jpg"}
+{"product_id": "10003", "status": "enable", "name": "BBB blue blouse", "category_id1": "1", "category_id2": "1", "category_id3": "3", "image_url": "http://bbbbbbb.ddddd.jpg"}
 ...
 ```
 
 ##### csv Example
 ```
-10001,enable,AAA red onepiece,A001,A001001,A001001001,http://aaaaaaa.bbbbb.jpg
-10002,disable,BBB blue onepiece,A001,A001001,A001001002,http://bbbbbbb.ccccc.jpg
+10001,enable,AAA red onepiece,1,1,2,http://aaaaaaa.bbbbb.jpg
+10002,disable,BBB blue onepiece,1,1,2,http://bbbbbbb.ccccc.jpg
+10003,enable,BBB blue blouse,1,1,3,http://bbbbbbb.ddddd.jpg
 ...
 ```
 
@@ -137,7 +141,7 @@ POST | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index
 <summary>Request Example 1</summary>
 
 ```
-curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -H "Content-Type: multipart/form-file" -F "file=@/home/user1/202106251000_product.jsonl"
+curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -H "Content-Type: multipart/form-data" -F "file=@/home/user1/202106251000_product.jsonl"
 ```
 
 </details>
@@ -146,7 +150,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 <summary>Request Example 2</summary>
 
 ```
-curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
+curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
 ```
 
 </details>
@@ -195,6 +199,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
 | -42000 | NotExistServiceID | Unregistered service ID. |
 | -50000 | InternalServerError | Server error. |
+| 4041007 | URL Not Found | A request was made with an undefined API. |
 
 ### Service Information
 * Check the current information of services.
@@ -218,7 +223,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services
 <summary>Request Example</summary>
 
 ```
-curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-Type: application/json"
+curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services" -H "Content-Type: application/json"
 ```
 
 </details>
@@ -280,6 +285,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 | -40400 | NoApiFound | A request was made with an undefined API. |
 | -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
 | -50000 | InternalServerError | Server error. |
+| 4041007 | URL Not Found | A request was made with an undefined API. |
 
 ### Indexing Status Query
 * Check the current status of requested indexing.
@@ -305,7 +311,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
 | start | int | O | 0 | Start index.<br/>Starts from 0. |
-| limit | int | O | 100 | Max 100.<br/>start:0, limit:100 indicates 1-100. <br/>start:200, limit:100 indicates 201-300. |
+| limit | int | O | 100 | Max 100.<br/>start:0, limit:100 indicates 1-100.<br/>start:200, limit:100 indicates 201-300. |
 | order | string | X | "reservedTime:desc" | (Default) In descending order of the registration time<br/>Only one condition can be set<br/>For conditions that can set, see ['Sorting'](#indexes-status-order) |
 | status | string | X | "finished" | Status value of indexing |
 
@@ -420,3 +426,4 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 | -41000 | UnauthorizedAppKey | Unauthorized Appkey. |
 | -42000 | NotExistServiceID | Unregistered service ID. |
 | -50000 | InternalServerError | Server error. |
+| 4041007 | URL Not Found | A request was made with an undefined API. |

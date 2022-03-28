@@ -22,9 +22,11 @@
 
 [APIドメイン]
 
-| 環境 | ドメイン |
+| リージョン | ドメイン |
 | --- | --- |
-| Real | https://ai-fashion.cloud.toast.com |
+| 韓国(パンギョ) | https://kr1-aifashion.api.nhncloudservice.com |
+| 韓国(ピョンチョン) | https://kr2-aifashion.api.nhncloudservice.com |
+| 日本(東京) | https://jp1-aifashion.api.nhncloudservice.com |
 
 <span id="common-response"></span>
 ### レスポンス共通情報
@@ -75,11 +77,11 @@
 | 名前 | field | value type | 必須 | max length | 備考 |
 | -- | -- | -- | -- | -- | -- |
 | 商品ID | product_id | string | O | 72 | unique key |
-| 状態 | status | string | O | 7 | enable：追加またはアップデート <br/>disable：削除 |
+| 状態 | status | string | O | 7 | enable：追加またはアップデート<br/>disable：削除 |
 | 商品名 | name | string | O | 256 | 商品名 |
-| カテゴリー1depth | category1_id | string | O | 72 | カテゴリー1depthID |
-| カテゴリー2depth | category2_id | string | O | 72 | カテゴリー2depthID |
-| カテゴリー3depth | category3_id | string | O | 72 | カテゴリー3depthID |
+| カテゴリー1depth | category1_id | string | O | 10 | フィルターとして使用（音ではなく整数）<br/>0 <= category1_id <= 4294967295 |
+| カテゴリー2depth | category2_id | string | O | 10 | フィルターとして使用（音ではなく整数）<br/>0 <= category2_id <= 4294967295 |
+| カテゴリー3depth | category3_id | string | O | 10 | フィルターとして使用（音ではなく整数）<br/>0 <= category3_id <= 4294967295 |
 | 画像url | image_url | string | O | 1000 | アクセス可能な画像URL |
 
 ##### 画像ガイド
@@ -92,15 +94,17 @@
 
 ##### jsonl例
 ```
-{"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category_id1": "A001", "category_id2": "A001001", "category_id3": "A001001001", "image_url": "http://aaaaaaa.bbbbb.jpg"}
-{"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category_id1": "A001", "category_id2": "A001001", "category_id3": "A001001002", "image_url": "http://bbbbbbb.ccccc.jpg"}
+{"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://aaaaaaa.bbbbb.jpg"}
+{"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://bbbbbbb.ccccc.jpg"}
+{"product_id": "10003", "status": "enable", "name": "BBB blue blouse", "category_id1": "1", "category_id2": "1", "category_id3": "3", "image_url": "http://bbbbbbb.ddddd.jpg"}
 ...
 ```
 
 ##### csv例
 ```
-10001,enable,AAA red onepiece,A001,A001001,A001001001,http://aaaaaaa.bbbbb.jpg
-10002,disable,BBB blue onepiece,A001,A001001,A001001002,http://bbbbbbb.ccccc.jpg
+10001,enable,AAA red onepiece,1,1,2,http://aaaaaaa.bbbbb.jpg
+10002,disable,BBB blue onepiece,1,1,2,http://bbbbbbb.ccccc.jpg
+10003,enable,BBB blue blouse,1,1,3,http://bbbbbbb.ddddd.jpg
 ...
 ```
 
@@ -137,7 +141,7 @@ POST | /ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index
 <summary>リクエスト例1</summary>
 
 ```
-curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -H "Content-Type: multipart/form-file" -F "file=@/home/user1/202106251000_product.jsonl"
+curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -H "Content-Type: multipart/form-data" -F "file=@/home/user1/202106251000_product.jsonl"
 ```
 
 </details>
@@ -146,7 +150,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 <summary>リクエスト例2</summary>
 
 ```
-curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
+curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
 ```
 
 </details>
@@ -195,6 +199,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -41000 | UnauthorizedAppKey | 承認されていないAppkey |
 | -42000 | NotExistServiceID | 登録されていないサービスID |
 | -50000 | InternalServerError | サーバーエラー |
+| 4041007 | URL Not Found | 定義されていないapiでリクエストした場合 |
 
 ### サービス情報
 * サービスの現在情報を確認します。
@@ -218,7 +223,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services
 <summary>リクエスト例 </summary>
 
 ```
-curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-Type: application/json"
+curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services" -H "Content-Type: application/json"
 ```
 
 </details>
@@ -280,6 +285,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 | -40400 | NoApiFound | 定義されていないapiでリクエストした場合 |
 | -41000 | UnauthorizedAppKey | 承認されていないAppkey |
 | -50000 | InternalServerError | サーバーエラー |
+| 4041007 | URL Not Found | 定義されていないapiでリクエストした場合 |
 
 ### インデックス状態照会
 * リクエストされたインデックスの現現在状態を確認します。
@@ -369,7 +375,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 | data.items[].service | String | O | testserviceid | 該当インデックスリクエストが発生したサービス名 |
 | data.items[].id | String | O | 24bb94b3-8a6b-488e-b038-4f6038da2596 | インデックスID |
 | data.items[].filename | String | O | 202106251000_product.jsonl | インデックスファイル名 |
-| data.items[].status | string | O | reserved | 現在のインデックス状態を表します。<br/>reserved：待機<br/>running：進行中 <br>failed：全て失敗<br/>finished：完了(部分失敗を含む) |
+| data.items[].status | string | O | reserved | 現在のインデックス状態を表します。<br/>reserved：待機<br/>running：進行中<br/>failed：全て失敗<br/>finished：完了(部分失敗を含む) |
 | data.items[].reservedTime | unix timestamp | O | 1625098033 | インデックス登録時間 |
 | data.items[].startTime | unix timestamp | O | 1625098033 | インデックス開始時間 |
 | data.items[].finishTime | unix timestamp | O | 1625098033 | インデックスが完了した時間 |
@@ -420,3 +426,4 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 | -41000 | UnauthorizedAppKey | 承認されていないAppkey |
 | -42000 | NotExistServiceID | 登録されていないサービスID |
 | -50000 | InternalServerError | サーバーエラー |
+| 4041007 | URL Not Found | 定義されていないapiでリクエストした場合 |

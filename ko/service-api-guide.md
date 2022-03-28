@@ -15,9 +15,11 @@
 
 [API 도메인]
 
-| 환경 | 도메인 |
+| 리전 | 도메인 |
 | --- | --- |
-| Real | https://ai-fashion.cloud.toast.com |
+| 한국(판교) | https://kr1-aifashion.api.nhncloudservice.com |
+| 한국(평촌) | https://kr2-aifashion.api.nhncloudservice.com |
+| 일본(도쿄) | https://jp1-aifashion.api.nhncloudservice.com |
 
 <span id="input-image-guide"></span>
 ### 입력 이미지 가이드

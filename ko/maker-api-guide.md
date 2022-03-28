@@ -22,9 +22,11 @@
 
 [API 도메인]
 
-| 환경 | 도메인 |
+| 리전 | 도메인 |
 | --- | --- |
-| Real | https://ai-fashion.cloud.toast.com |
+| 한국(판교) | https://kr1-aifashion.api.nhncloudservice.com |
+| 한국(평촌) | https://kr2-aifashion.api.nhncloudservice.com |
+| 일본(도쿄) | https://jp1-aifashion.api.nhncloudservice.com |
 
 <span id="common-response"></span>
 ### 응답 공통 정보
@@ -75,11 +77,11 @@
 | 이름 | field | value type | 필수 | max length | 비고 |
 | -- | -- | -- | -- | -- | -- |
 | 상품ID | product_id | string | O | 72 | unique key |
-| 상태 | status | string | O | 7 | enable: 추가 또는 업데이트 <br/>disable: 삭제 |
+| 상태 | status | string | O | 7 | enable: 추가 또는 업데이트<br/>disable: 삭제 |
 | 상품이름 | name | string | O | 256 | 상품명 |
-| 카테고리 1depth | category1_id | string | O | 72 | 카테고리 1depth 아이디 |
-| 카테고리 2depth | category2_id | string | O | 72 | 카테고리 2depth 아이디 |
-| 카테고리 3depth | category3_id | string | O | 72 | 카테고리 3depth 아이디 |
+| 카테고리 1depth | category1_id | string | O | 10 | 필터로 사용(음이 아닌 정수)<br/>0 <= category1_id <= 4294967295 |
+| 카테고리 2depth | category2_id | string | O | 10 | 필터로 사용(음이 아닌 정수)<br/>0 <= category2_id <= 4294967295 |
+| 카테고리 3depth | category3_id | string | O | 10 | 필터로 사용(음이 아닌 정수)<br/>0 <= category3_id <= 4294967295 |
 | 이미지url | image_url | string | O | 1000 | 접근 가능한 이미지 URL |
 
 ##### 이미지 가이드
@@ -92,15 +94,17 @@
 
 ##### jsonl 예
 ```
-{"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category_id1": "A001", "category_id2": "A001001", "category_id3": "A001001001", "image_url": "http://aaaaaaa.bbbbb.jpg"}
-{"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category_id1": "A001", "category_id2": "A001001", "category_id3": "A001001002", "image_url": "http://bbbbbbb.ccccc.jpg"}
+{"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://aaaaaaa.bbbbb.jpg"}
+{"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://bbbbbbb.ccccc.jpg"}
+{"product_id": "10003", "status": "enable", "name": "BBB blue blouse", "category_id1": "1", "category_id2": "1", "category_id3": "3", "image_url": "http://bbbbbbb.ddddd.jpg"}
 ...
 ```
 
 ##### csv 예
 ```
-10001,enable,AAA red onepiece,A001,A001001,A001001001,http://aaaaaaa.bbbbb.jpg
-10002,disable,BBB blue onepiece,A001,A001001,A001001002,http://bbbbbbb.ccccc.jpg
+10001,enable,AAA red onepiece,1,1,2,http://aaaaaaa.bbbbb.jpg
+10002,disable,BBB blue onepiece,1,1,2,http://bbbbbbb.ccccc.jpg
+10003,enable,BBB blue blouse,1,1,3,http://bbbbbbb.ddddd.jpg
 ...
 ```
 
@@ -137,7 +141,7 @@ POST | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index
 <summary>요청 예 1</summary>
 
 ```
-curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -H "Content-Type: multipart/form-file" -F "file=@/home/user1/202106251000_product.jsonl"
+curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -H "Content-Type: multipart/form-data" -F "file=@/home/user1/202106251000_product.jsonl"
 ```
 
 </details>
@@ -146,7 +150,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 <summary>요청 예 2</summary>
 
 ```
-curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
+curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
 ```
 
 </details>
@@ -195,6 +199,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
 | -50000 | InternalServerError | 서버 오류 |
+| 4041007 | URL Not Found | 정의되지 않은 API로 요청한 경우 |
 
 ### 서비스 정보
 * 서비스들의 현재 정보를 확인합니다.
@@ -218,7 +223,7 @@ GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services
 <summary>요청 예 </summary>
 
 ```
-curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Content-Type: application/json"
+curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services" -H "Content-Type: application/json"
 ```
 
 </details>
@@ -280,6 +285,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/info" -H "Conte
 | -40400 | NoApiFound | 정의되지 않은 API로 요청한 경우 |
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -50000 | InternalServerError | 서버 오류 |
+| 4041007 | URL Not Found | 정의되지 않은 API로 요청한 경우 |
 
 ### 색인 상태 조회
 * 요청된 색인들의 현재 상태를 확인합니다.
@@ -420,3 +426,4 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/indexes?start=0&limit=1
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -42000 | NotExistServiceID | 등록되지 않은 서비스 아이디 |
 | -50000 | InternalServerError | 서버 오류 |
+| 4041007 | URL Not Found | 정의되지 않은 API로 요청한 경우 |
