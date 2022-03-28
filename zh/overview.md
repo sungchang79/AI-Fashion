@@ -31,7 +31,7 @@ The main features of AI Fashion are as follows.
 
 ## Information on Processing of Personal Information
 
-- While using the AI ​​Fashion service, customers may collect personal and sensitive information from users. Therefore, customers of this service must notify users of legal notices and obtain consent in accordance with the Personal Information Protection Act. In addition, during this process, a business consignment relationship may occur between the customer and NHN regarding the processing of personal information. A customer who is in the position of the consignor may enter into a consignment contract by separate writing with NHN, the consignee, and may notify the following in the privacy policy operated by the customer.
+- While using the AI Fashion service, customers may collect personal and sensitive information from users. Therefore, customers of this service must notify users of legal notices and obtain consent in accordance with the Personal Information Protection Act. In addition, during this process, a business consignment relationship may occur between the customer and NHN Cloud regarding the processing of personal information. A customer who is in the position of the consignor may enter into a consignment contract by separate writing with NHN Cloud, the consignee, and may notify the following in the privacy policy operated by the customer.
 
-    \- Consignee: NHN
+    \- Consignee: NHN Cloud
     \- Consignment description: Providing AI Fashion service
