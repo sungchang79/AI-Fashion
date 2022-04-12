@@ -501,7 +501,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | filter.category2_id | string | X | !equal:3 | category2_id 값으로 필터링 |
 | filter.category3_id | string | X | range:1003:1005 | category3_id 값으로 필터링 |
 
-* filter.category1_id~3은 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
+* filter.category1~3_id는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
 
 <details><summary>リクエスト例</summary>
 
