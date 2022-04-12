@@ -307,9 +307,9 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | limit | int | O | 100 | 最大サイズ<br>1以上200以下で設定可能 |
-| filter.category1_id | string | X | equal:3 | category1_id 값을 필터링 |
-| filter.category2_id | string | X | !equal:3 | category2_id 값을 필터링 |
-| filter.category3_id | string | X | range:1003:1005 | category3_id 값을 필터링 |
+| filter.category1_id | string | X | equal:3 | category1_id 값으로 필터링 |
+| filter.category2_id | string | X | !equal:3 | category2_id 값으로 필터링 |
+| filter.category3_id | string | X | range:1003:1005 | category3_id 값으로 필터링 |
 
 * filter.category1~3_id는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
 
@@ -497,9 +497,9 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | --- | --- | --- | --- | --- |
 | limit | int | O | 100 | 最大サイズ<br>1以上200以下で設定可能 |
 | link | string | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0%3D | detect APIから伝達されたlink(URL encodingが必要) |
-| filter.category1_id | string | X | equal:3 | category1_id 값을 필터링 |
-| filter.category2_id | string | X | !equal:3 | category2_id 값을 필터링 |
-| filter.category3_id | string | X | range:1003:1005 | category3_id 값을 필터링 |
+| filter.category1_id | string | X | equal:3 | category1_id 값으로 필터링 |
+| filter.category2_id | string | X | !equal:3 | category2_id 값으로 필터링 |
+| filter.category3_id | string | X | range:1003:1005 | category3_id 값으로 필터링 |
 
 * filter.category1_id~3은 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
 
