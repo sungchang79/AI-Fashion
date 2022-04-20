@@ -30,6 +30,29 @@
 * 画像ファイルの最大サイズ：5,000,000 bytes(ただし、[tag API](#tag-api)は1,000,000 bytes)
 * サポート画像フォーマット：PNG、JPEG、GIF
 
+<span id="filtering-guide"></span>
+### フィルタリングガイド
+
+* 制限されたカテゴリーで検索するときに使用します。
+
+#### 対象フィールド
+| 名前 | フィールド名 |
+| --- | --- |
+| カテゴリー1depth | category1_id |
+| カテゴリー2depth | category2_id |
+| カテゴリー3depth | category3_id |
+
+#### 文法
+* `filter.{フィールド名}`=`演算子`:`値`
+* 値(values)は正の値の整数のみ可能です。タイプ(uint32: 0~4294967295)
+
+| 条件 | 演算子 | 例 | 説明 |
+| --- | --- | --- | --- |
+| equal(default) | equal | filter.category2_id=1003,1005 or<br/>filter.category2_id=equal:1003 | 対象フィールドの値がパラメータ値と同じ文書のみ結果としてレスポンスします。<br/>コンマ(,)で区切ってOR検索が可能です。 |
+| not equal | !equal | filter.category2_id=!equal:1003 or <br/>filter.category2_id=!equal:1003,1005 | 対象フィールドの値がパラメータ値と異なる文書のみ結果としてレスポンスします。<br/>コンマ(,)で区切ってOR検索が可能です。 |
+| with in range | range | filter.category2_id=range:1003:1004 | 対象フィールドの値がパラメータ値の範囲内にある文書のみ結果としてレスポンスします。 |
+| out of range | !range | filter.category2_id=!range:1002:1004 | 対象フィールドの値がパラメータ値の範囲外にある文書のみ結果としてレスポンスします。 |
+
 <span id="common-response"></span>
 ### レスポンス共通情報
 
@@ -284,8 +307,11 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | limit | int | O | 100 | 最大サイズ<br>1以上200以下で設定可能 |
+| filter.category1_id | string | X | equal:3 | category1_id値でフィルタリング |
+| filter.category2_id | string | X | !equal:3 | category2_id値でフィルタリング |
+| filter.category3_id | string | X | range:1003:1005 | category3_id値でフィルタリング |
 
-
+* filter.category1~3_idは[フィルタリングガイド](./service-api-guide/#filtering-guide)で確認可能
 
 <details><summary>リクエスト例</summary>
 
@@ -471,6 +497,11 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | --- | --- | --- | --- | --- |
 | limit | int | O | 100 | 最大サイズ<br>1以上200以下で設定可能 |
 | link | string | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0%3D | detect APIから伝達されたlink(URL encodingが必要) |
+| filter.category1_id | string | X | equal:3 | category1_id値でフィルタリング |
+| filter.category2_id | string | X | !equal:3 | category2_id値でフィルタリング |
+| filter.category3_id | string | X | range:1003:1005 | category3_id値でフィルタリング |
+
+* filter.category1~3_idは[フィルタリングガイド](./service-api-guide/#filtering-guide)で確認可能
 
 <details><summary>リクエスト例</summary>
 
