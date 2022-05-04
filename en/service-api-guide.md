@@ -45,14 +45,11 @@
 
 #### Syntax
 * `filter.{field name}` = `operator` : `value`
-* For values, only positive integers are allowed. Type (uint32: 0~4294967295)
 
 | Condition | Operator | Example | Description |
 | --- | --- | --- | --- |
 | equal(default) | equal | filter.category2_id=1003,1005 or<br/>filter.category2_id=equal:1003 | Only documents where the value of the target field is equal to the value of the parameter are responded as a result.<br/>You can perform an OR search by separating values with commas (,). |
 | not equal | !equal | filter.category2_id=!equal:1003 or <br/>filter.category2_id=!equal:1003,1005 | Only documents where the value of the target field is not equal to the value of the parameter are responded as a result.<br/>You can perform an OR search by separating values with commas (,). |
-| with in range | range | filter.category2_id=range:1003:1004 | Only documents where the value of the target field is within the range of the parameter values will be responded as a result. |
-| out of range | !range | filter.category2_id=!range:1002:1004 | Only documents where the value of the target field is outside the range of the parameter values will be responded as a result. |
 
 <span id="common-response"></span>
 ### Response Common Information
@@ -310,7 +307,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | limit | int | O | 100 | Max size<br>Can be set in value from 1 to 200 |
 | filter.category1_id | string | X | equal:3 | Filter by category1_id value |
 | filter.category2_id | string | X | !equal:3 | Filter by category2_id value |
-| filter.category3_id | string | X | range:1003:1005 | Filter by category3_id value |
+| filter.category3_id | string | X | !equal:3 | Filter by category3_id value |
 
 * filter.category1~3_id can be found in the [Filtering Guide](./service-api-guide/#filtering-guide)
 
@@ -500,7 +497,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | link | string | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0%3D | A link received from detect API (URL encoding is required.) |
 | filter.category1_id | string | X | equal:3 | Filter by category1_id value |
 | filter.category2_id | string | X | !equal:3 | Filter by category2_id value |
-| filter.category3_id | string | X | range:1003:1005 | Filter by category3_id value |
+| filter.category3_id | string | X | !equal:3 | Filter by category3_id value |
 
 * filter.category1~3_id can be found in the [Filtering Guide](./service-api-guide/#filtering-guide)
 
