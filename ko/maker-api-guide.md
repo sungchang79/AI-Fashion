@@ -79,9 +79,9 @@
 | 상품ID | product_id | string | O | 72 | unique key |
 | 상태 | status | string | O | 7 | enable: 추가 또는 업데이트<br/>disable: 삭제 |
 | 상품이름 | name | string | O | 256 | 상품명 |
-| 카테고리 1depth | category1_id | string | O | 10 | 필터로 사용(음이 아닌 정수)<br/>0 <= category1_id <= 4294967295 |
-| 카테고리 2depth | category2_id | string | O | 10 | 필터로 사용(음이 아닌 정수)<br/>0 <= category2_id <= 4294967295 |
-| 카테고리 3depth | category3_id | string | O | 10 | 필터로 사용(음이 아닌 정수)<br/>0 <= category3_id <= 4294967295 |
+| 카테고리 1depth | category1_id | string | O | 72 | 카테고리 1depth 아이디 |
+| 카테고리 2depth | category2_id | string | O | 72 | 카테고리 2depth 아이디 |
+| 카테고리 3depth | category3_id | string | O | 72 | 카테고리 3depth 아이디 |
 | 이미지url | image_url | string | O | 1000 | 접근 가능한 이미지 URL |
 
 ##### 이미지 가이드

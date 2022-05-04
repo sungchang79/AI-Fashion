@@ -79,9 +79,9 @@
 | Product ID | product_id | string | O | 72 | unique key |
 | Status | status | string | O | 7 | enable: Add or update<br/>disable: Delete |
 | Product name | name | string | O | 256 | Product name |
-| Category depth 1 | category1_id | string | O | 10 | Use as a filter (non-negative integer)<br/>0 <= category1_id <= 4294967295 |
-| Category depth 2 | category2_id | string | O | 10 | Use as a filter (non-negative integer)<br/>0 <= category2_id <= 4294967295 |
-| Category depth 3 | category3_id | string | O | 10 | Use as a filter (non-negative integer)<br/>0 <= category3_id <= 4294967295 |
+| Category depth 1 | category1_id | string | O | 72 | Category depth 1 ID |
+| Category depth 2 | category2_id | string | O | 72 | Category depth 2 ID |
+| Category depth 3 | category3_id | string | O | 72 | Category depth 3 ID |
 | Image URL | image_url | string | O | 1000 | Accessible image URL |
 
 ##### Image Guide
