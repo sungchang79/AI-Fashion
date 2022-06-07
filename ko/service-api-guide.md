@@ -308,7 +308,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | filter.category1_id | string | X | equal:3 | category1_id 값으로 필터링 |
 | filter.category2_id | string | X | !equal:3 | category2_id 값으로 필터링 |
 | filter.category3_id | string | X | !equal:3 | category3_id 값으로 필터링 |
-| threshold | float32 | X | 0.8 | 매칭 여부를 판단하는 유사도 기준값. <br/> data.items[].similarity >= threshold  <br/>0 < threshold <= 1.0 |
+| threshold | float32 | X | 0.8 | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
 
 * filter.category1~3_id는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
 
@@ -499,7 +499,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | filter.category1_id | string | X | equal:3 | category1_id 값으로 필터링 |
 | filter.category2_id | string | X | !equal:3 | category2_id 값으로 필터링 |
 | filter.category3_id | string | X | !equal:3 | category3_id 값으로 필터링 |
-| threshold | float32 | X | 0.8 | 매칭 여부를 판단하는 유사도 기준값. <br/> data.items[].similarity >= threshold  <br/>0 < threshold <= 1.0 |
+| threshold | float32 | X | 0.8 | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
 
 * filter.category1~3_id는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
 
