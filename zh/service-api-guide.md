@@ -32,24 +32,24 @@
 * Supported image formats: PNG, JPEG, GIF
 
 <span id="filtering-guide"></span>
-### 필터링 가이드
+### Filtering Guide
 
-* 제한된 카테고리로 검색할 때 사용합니다.
+* The filtering function is used to search by limiting the categories.
 
-#### 대상 필드
-| 이름 | 필드명 |
+#### Target Field
+| Name | Field Name |
 | --- | --- |
-| 카테고리 1depth | category1_id |
-| 카테고리 2depth | category2_id |
-| 카테고리 3depth | category3_id |
+| Category depth 1 | category1_id |
+| Category depth 2 | category2_id |
+| Category depth 3 | category3_id |
 
-#### 문법
-* `filter.{필드명}`=`연산자`:`값`
+#### Syntax
+* `filter.{field name}` = `operator` : `value`
 
-| 조건 | 연산자 | 예제 | 설명 |
+| Condition | Operator | Example | Description |
 | --- | --- | --- | --- |
-| equal(default) | equal | filter.category2_id=1003,1005 or<br/>filter.category2_id=equal:1003 | 대상 필드의 값이 파라미터 값과 같은 문서만 결과로 응답합니다.<br/>콤마(,)로 구분하여 OR 검색이 가능합니다. |
-| not equal | !equal | filter.category2_id=!equal:1003 or <br/>filter.category2_id=!equal:1003,1005 | 대상 필드의 값이 파라미터 값과 다른 문서만 결과로 응답합니다.<br/>콤마(,)로 구분하여 OR 검색이 가능합니다. |
+| equal(default) | equal | filter.category2_id=1003,1005 or<br/>filter.category2_id=equal:1003 | Only documents where the value of the target field is equal to the value of the parameter are responded as a result.<br/>You can perform an OR search by separating values with commas (,). |
+| not equal | !equal | filter.category2_id=!equal:1003 or <br/>filter.category2_id=!equal:1003,1005 | Only documents where the value of the target field is not equal to the value of the parameter are responded as a result.<br/>You can perform an OR search by separating values with commas (,). |
 
 <span id="common-response"></span>
 ### Response Common Information
@@ -305,11 +305,12 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
 | limit | int | O | 100 | Max size<br>Can be set in value from 1 to 200 |
-| filter.category1_id | string | X | equal:3 | category1_id 값으로 필터링 |
-| filter.category2_id | string | X | !equal:3 | category2_id 값으로 필터링 |
-| filter.category3_id | string | X | !equal:3 | category3_id 값으로 필터링 |
+| filter.category1_id | string | X | equal:3 | Filter by category1_id value |
+| filter.category2_id | string | X | !equal:3 | Filter by category2_id value |
+| filter.category3_id | string | X | !equal:3 | Filter by category3_id value |
+| threshold | float32 | X | 0.8 | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
 
-* filter.category1~3_id는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
+* filter.category1~3_id can be found in the [Filtering Guide](./service-api-guide/#filtering-guide)
 
 <details><summary>Request Example</summary>
 
@@ -495,11 +496,12 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | --- | --- | --- | --- | --- |
 | limit | int | O | 100 | Max size<br>Can be set in value from 1 to 200 |
 | link | string | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0%3D | A link received from detect API (URL encoding is required.) |
-| filter.category1_id | string | X | equal:3 | category1_id 값으로 필터링 |
-| filter.category2_id | string | X | !equal:3 | category2_id 값으로 필터링 |
-| filter.category3_id | string | X | !equal:3 | category3_id 값으로 필터링 |
+| filter.category1_id | string | X | equal:3 | Filter by category1_id value |
+| filter.category2_id | string | X | !equal:3 | Filter by category2_id value |
+| filter.category3_id | string | X | !equal:3 | Filter by category3_id value |
+| threshold | float32 | X | 0.8 | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
 
-* filter.category1~3_id는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
+* filter.category1~3_id can be found in the [Filtering Guide](./service-api-guide/#filtering-guide)
 
 <details><summary>Request Example</summary>
 
